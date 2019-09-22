@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="15dp"
+    android:background="@drawable/ic_bg"
+
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Đăng nhập"
+                android:gravity="center"
+                android:textColor="#EDE6F5FF"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:padding="15dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:background="@drawable/shape_boder"
+                android:id="@+id/ed_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tên tài khoản"
+                android:textColorHint="#353535"
+                android:textSize="18sp"
+                android:backgroundTint="#79A8A8A8"
+                android:textColor="#353535"
+                android:drawablePadding="5dp"
+                android:drawableLeft="@drawable/ic_account"
+                android:drawableTint="#353535"
+                android:paddingHorizontal="7dp"
+                android:paddingVertical="12dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:background="@drawable/shape_boder"
+                android:id="@+id/ed_pass"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mật khẩu"
+                android:textSize="18sp"
+                android:backgroundTint="#79A8A8A8"
+                android:textColor="#353535"
+                android:drawableLeft="@drawable/ic_lock"
+                android:drawableTint="#353535"
+                android:textColorHint="#353535"
+                android:drawablePadding="5dp"
+                android:paddingHorizontal="7dp"
+                android:paddingVertical="12dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <Button
+
+                android:layout_marginTop="7dp"
+                android:id="@+id/btn_dangnhap"
+                android:backgroundTint="#F5F1F1F1"
+                android:background="@drawable/shape_boder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đăng nhập"
+                android:textColor="#4D4C4C"
+                android:textStyle="bold"
+                android:paddingHorizontal="30sp"
+                android:paddingVertical="12dp"
+                />
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/shape_boder"
+                android:backgroundTint="#79A8A8A8"
+                android:paddingLeft="15dp"
+                >
+                <TextView
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bạn không có tài khoản? "
+                    android:textColor="#353535"
+                    android:layout_marginRight="10dp"
+                    />
+                <Button
+                    android:id="@+id/btn_dangky"
+                    android:backgroundTint="#EE2240EC"
+                    android:background="@drawable/shape_boder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Đăng ký "
+                    android:textColor="#fff"
+                    android:textSize="12sp"
+                    android:paddingHorizontal="10dp"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
