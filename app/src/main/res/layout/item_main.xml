@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_marginVertical="5dp"
+        android:padding="3dp"
+        app:cardCornerRadius="10dp"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/im_picture_news"
+                android:layout_width="match_parent"
+                android:layout_height="390dp"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/anh" />
+
+
+
+            <LinearLayout
+                android:padding="7dp"
+                android:paddingLeft="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/ln_date"
+                android:orientation="vertical"
+                android:background="#74535353"
+                android:paddingHorizontal="15dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:gravity="center"
+                        android:id="@+id/tv_namePets_news"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:text="Minh KUN"
+                        android:textSize="18sp"
+                        android:textColor="#501CAD"
+                        android:textStyle="bold"
+                        />
+                    <ImageView
+                        android:id="@+id/im_gender_news"
+                        android:paddingHorizontal="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/man"
+                        android:scaleType="center"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_age_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|bottom"
+                    android:text="Tuổi: 3thang"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                     />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ln_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/im_picture_news"
+                android:background="#fff"
+                android:padding="5dp"
+                android:orientation="horizontal">
+
+               <ImageButton
+                   android:layout_marginHorizontal="5dp"
+                   android:id="@+id/imgbtn_like_news"
+                   android:padding="5dp"
+                   android:layout_width="0dp"
+                   android:layout_weight="1"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/heart"
+                   android:background="@drawable/border_radius_12dp"
+                   android:backgroundTint="#9F9B9B9B"
+                   android:tint="#353535"
+                   />
+                <ImageButton
+                    android:layout_marginHorizontal="5dp"
+                    android:id="@+id/imgbtn_comment_news"
+                    android:padding="5dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/chat"
+                    android:background="@drawable/border_radius_12dp"
+                    android:backgroundTint="#9F9B9B9B"
+                    android:tint="#353535"
+                    />
+                <ImageButton
+                    android:layout_marginHorizontal="5dp"
+                    android:id="@+id/imgbtn_share_news"
+                    android:padding="5dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/share"
+                    android:background="@drawable/border_radius_12dp"
+                    android:backgroundTint="#9F9B9B9B"
+                    android:tint="#353535"
+                    />
+
+
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

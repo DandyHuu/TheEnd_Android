@@ -7,24 +7,79 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tapPager"
+<!--        <com.google.android.material.tabs.TabLayout-->
+<!--            android:id="@+id/tapPager"-->
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
 
-        </com.google.android.material.tabs.TabLayout>
+<!--        </com.google.android.material.tabs.TabLayout>-->
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
+            android:layout_above="@+id/ln_bottom"
             android:layout_height="match_parent">
 
         </androidx.viewpager.widget.ViewPager>
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ln_bottom"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="7dp"
+
+            android:orientation="horizontal">
+           <ImageButton
+               android:paddingVertical="3dp"
+               android:id="@+id/imgbtn_home"
+               android:layout_width="0dp"
+               android:scaleType="center"
+               android:layout_weight="1"
+               android:layout_height="wrap_content"
+               android:src="@drawable/home"
+               android:background="#fff"/>
+            <ImageButton
+                android:paddingVertical="3dp"
+                android:id="@+id/imgbtn_pets"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:scaleType="center"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pawprint"
+                android:background="#fff"/>
+            <ImageButton
+                android:paddingVertical="3dp"
+                android:id="@+id/imgbtn_new"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:scaleType="center"
+                android:layout_height="wrap_content"
+                android:src="@drawable/plus"
+                android:background="#fff"/>
+            <ImageButton
+                android:paddingVertical="3dp"
+                android:id="@+id/imgbtn_notifile"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:src="@drawable/notification"
+                android:background="#fff"/>
+            <ImageButton
+                android:paddingVertical="3dp"
+                android:id="@+id/imgbtn_user"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:src="@drawable/profiles"
+                android:background="#fff"/>
+        </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,7 +102,7 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/meal_image_order"
-                    android:layout_width="wrap_content"
+                    android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@mipmap/ic_launcher"
                     app:civ_border_width="2dp"
@@ -55,10 +110,12 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"/>
                 <TextView
+                    android:layout_marginTop="3dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Hữu Dandy"
                     android:textColor="#fff"
+                    android:textStyle="bold"
                     android:textSize="18sp"
                     />
                 <TextView
@@ -66,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:text="robotmeobg@gmail.com"
                     android:textColor="#fff"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     />
             </LinearLayout>
 
@@ -83,6 +140,7 @@
                 android:fillViewport="true"
                 >
                 <LinearLayout
+                    android:paddingBottom="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -94,6 +152,7 @@
                         android:orientation="vertical"
                         >
                         <LinearLayout
+                            android:id="@+id/ln_home"
                             android:paddingHorizontal="10dp"
                             android:paddingVertical="7dp"
                             android:layout_width="match_parent"
@@ -108,7 +167,7 @@
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/ic_account"
+                                    android:src="@drawable/pawprint"
                                     android:tint="#6F6F6F"
                                     />
 
@@ -131,6 +190,7 @@
 
                         </LinearLayout>
                         <LinearLayout
+                            android:id="@+id/ln_pets"
                             android:paddingHorizontal="10dp"
                             android:paddingVertical="7dp"
                             android:layout_width="match_parent"
@@ -145,7 +205,7 @@
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/ic_account"
+                                    android:src="@drawable/ic_adb_black_24dp"
                                     android:tint="#6F6F6F"
                                     />
 
@@ -168,6 +228,7 @@
 
                         </LinearLayout>
                         <LinearLayout
+                            android:id="@+id/ln_notifi"
                             android:paddingHorizontal="10dp"
                             android:paddingVertical="7dp"
                             android:layout_width="match_parent"
@@ -182,7 +243,7 @@
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/ic_account"
+                                    android:src="@drawable/notification"
                                     android:tint="#6F6F6F"
                                     />
 
@@ -214,6 +275,7 @@
                         android:orientation="vertical"
                         >
                         <LinearLayout
+                            android:id="@+id/ln_user"
                             android:paddingHorizontal="10dp"
                             android:paddingVertical="7dp"
                             android:layout_width="match_parent"
@@ -228,7 +290,7 @@
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/ic_account"
+                                    android:src="@drawable/profiles"
                                     android:tint="#6F6F6F"
                                     />
 
@@ -265,7 +327,7 @@
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/ic_account"
+                                    android:src="@drawable/pet_us"
                                     android:tint="#6F6F6F"
                                     />
 
@@ -278,7 +340,7 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="robotmeobg@gmail.com"
+                                    android:text="Về chúng tôi"
                                     android:textColor="#6F6F6F"
                                     android:lines="1"
                                     android:ellipsize="end"
@@ -302,7 +364,7 @@
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/ic_account"
+                                    android:src="@drawable/ic_cancel_black_24dp"
                                     android:tint="#6F6F6F"
                                     />
 
@@ -315,7 +377,7 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="robotmeobg@gmail.com"
+                                    android:text="Đăng xuất"
                                     android:textColor="#6F6F6F"
                                     android:lines="1"
                                     android:ellipsize="end"

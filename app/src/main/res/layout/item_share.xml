@@ -16,7 +16,7 @@
             <ImageView
                 android:id="@+id/im_share"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="400dp"
                 android:maxHeight="300dp"
                 android:scaleType="centerInside"
                 android:layout_alignParentTop="true"

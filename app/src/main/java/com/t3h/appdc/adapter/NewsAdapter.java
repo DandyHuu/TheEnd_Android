@@ -56,22 +56,21 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
         private Button btnDetail;
         public NewsHolder(@NonNull View itemView) {
             super(itemView);
-            imPet = itemView.findViewById(R.id.im_picture);
-            tvBirth = itemView.findViewById(R.id.tv_birth);
-            tvName = itemView.findViewById(R.id.tv_name);
-            tvGener = itemView.findViewById(R.id.tv_gener);
+            imPet = itemView.findViewById(R.id.im_picture_news);
+            tvBirth = itemView.findViewById(R.id.tv_age_news);
+            tvName = itemView.findViewById(R.id.tv_namePets_news);
 
-            btnDetail = itemView.findViewById(R.id.btn_profile);
-            btnDetail.setOnClickListener(this);
+//            btnDetail = itemView.findViewById(R.id.);
+//            btnDetail.setOnClickListener(this);
         }
         public void bindData(Pets p){
             tvName.setText(p.getName());
             tvBirth.setText(String.valueOf(p.getBirh()));
-            String gen = "Thái Hậu";
-            if (p.isGender() == true) {
-                gen = "Hoàng Thượng";
-            }
-            tvGener.setText(gen);
+//            String gen = "Thái Hậu";
+//            if (p.isGender() == true) {
+//                gen = "Hoàng Thượng";
+//            }
+//            tvGener.setText(gen);
             Glide.with(imPet)
                     .load(p.getPicture())
                     .placeholder(R.mipmap.ic_launcher)

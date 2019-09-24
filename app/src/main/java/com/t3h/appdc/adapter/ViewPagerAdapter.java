@@ -20,6 +20,9 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         notifyDataSetChanged();
     }
 
+
+
+
     @NonNull
     @Override
     public Fragment getItem(int position) {
