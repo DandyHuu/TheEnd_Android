@@ -1,7 +1,9 @@
 package com.t3h.appdc.adapter;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,48 +15,68 @@ import com.t3h.appdc.model.Pets;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class ShareAdapter {
+import de.hdodenhof.circleimageview.CircleImageView;
 
-    class ShareHolder extends RecyclerView.ViewHolder {
-        private ImageView imPetShare, imGender;
-        private TextView tvNamePet, tvIDPet, tvMaster, tvAgePet;
+public class SharePetAdapter extends RecyclerView.Adapter<SharePetAdapter.SharePetHolder> {
+    private LayoutInflater inflater;
+    private ArrayList<Pets> data;
+    private OnClickPet listenner;
 
-        public ShareHolder(@NonNull View itemView) {
+    public SharePetAdapter(Context context) {
+        this.inflater = LayoutInflater.from(context);
+    }
+
+    public void setData(ArrayList<Pets> data) {
+        this.data = data;
+        notifyDataSetChanged();
+    }
+
+    public void setListenner(OnClickPet listenner) {
+        this.listenner = listenner;
+    }
+
+    @NonNull
+    @Override
+    public SharePetHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = inflater.inflate(R.layout.item_petshare,parent,false);
+        return new SharePetHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull SharePetHolder holder, int position) {
+        holder.bindData(data.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return data==null?0:data.size();
+    }
+
+    class SharePetHolder extends RecyclerView.ViewHolder {
+        private CircleImageView imgPet;
+        private TextView tvNamePet, tvAge, tvCate;
+
+        public SharePetHolder(@NonNull View itemView) {
             super(itemView);
-            imPetShare = itemView.findViewById(R.id.im_share);
-            imGender = itemView.findViewById(R.id.im_gender_share);
-            tvNamePet = itemView.findViewById(R.id.tv_namePets);
-            tvIDPet = itemView.findViewById(R.id.tv_id_share);
-            tvMaster = itemView.findViewById(R.id.tv_user_share);
-            tvAgePet = itemView.findViewById(R.id.tv_age_share);
+            imgPet = itemView.findViewById(R.id.im_file);
+            tvNamePet = itemView.findViewById(R.id.tv_name_pet);
+            tvAge = itemView.findViewById(R.id.tv_age_pet);
+            tvCate = itemView.findViewById(R.id.tv_cate_pet);
         }
-        public void bindData(Pets pet){
-            tvNamePet.setText(pet.getName());
-            tvAgePet.setText(getAge(pet.getBirh()) +" tuổi");
-            tvIDPet.setText(pet.getId()+"");
-            tvMaster.setText(pet.getMessage());
-            if (pet.isGender() == true) {
-                Glide.with(imGender)
-                        .load(R.drawable.man)
-                        .placeholder(R.mipmap.ic_launcher)
-                        .error(android.R.drawable.ic_delete)
-                        .into(imGender);
-            }
-            else{
-                Glide.with(imGender)
-                        .load(R.drawable.female)
-                        .placeholder(R.mipmap.ic_launcher)
-                        .error(android.R.drawable.ic_delete)
-                        .into(imGender);
-            }
-            Glide.with(imPetShare)
-                    .load(pet.getPicture())
+
+        public void bindData(Pets p){
+            tvNamePet.setText(p.getName());
+            tvAge.setText(p.getBirh()+"");
+            tvCate.setText(p.getSpecies());
+            Glide.with(imgPet)
+                    .load(p.getPicture())
                     .placeholder(R.mipmap.ic_launcher)
                     .error(R.drawable.ic_adb_black_24dp)
-                    .into(imPetShare);
+                    .into(imgPet);
         }
         public int getAge(String dateOfBirth) {
 
@@ -96,6 +118,9 @@ public class ShareAdapter {
 
             return age;
         }
+    }
 
+    public interface OnClickPet{
+        void OnClickItem(int position);
     }
 }

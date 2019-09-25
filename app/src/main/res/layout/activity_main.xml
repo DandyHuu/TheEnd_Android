@@ -26,6 +26,7 @@
 
         </androidx.viewpager.widget.ViewPager>
         <LinearLayout
+            android:background="@drawable/border_top_1dp"
             android:id="@+id/ln_bottom"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
@@ -491,6 +492,14 @@
 
                         </LinearLayout>
                     </LinearLayout>
+<!--                    item -->
+                <LinearLayout
+                    android:paddingVertical="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="@drawable/border_bottom"
+                    android:orientation="vertical"
+                    />
                 </LinearLayout>
 
             </ScrollView>

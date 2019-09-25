@@ -9,7 +9,7 @@ public class ApiBuilder {
 
     public static Retrofit getInstan(){
         if (retrofit == null) {
-            retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl("http://localhost:88/demo_pets/").build();
+            retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl("http://192.168.82.101:88/demo_pets/").build();
         }
         return retrofit;
 
@@ -17,7 +17,7 @@ public class ApiBuilder {
 
     public static Api getInstance(){
         if (api == null) {
-            api = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl("http://localhost:88/demo_pets/").build().create(Api.class);
+            api = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl("http://192.168.82.101:88/demo_pets/").build().create(Api.class);
         }
         return api;
 

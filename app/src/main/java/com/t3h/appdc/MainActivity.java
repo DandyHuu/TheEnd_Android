@@ -119,7 +119,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onResponse(Call<ArrayList<Pets>> call, Response<ArrayList<Pets>> response) {
                 dataNews=response.body();
-                frmNews.setData(dataNews);
+                frmNews.setDataNews(dataNews);
+                frmShare.setDataShare(dataNews);
             }
 
             @Override

@@ -1,5 +1,6 @@
 package com.t3h.appdc.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,7 +31,7 @@ import retrofit2.Response;
 
 public class NewsFragment extends Fragment{
     private RecyclerView rvNews;
-    private List<Pets> dataNews;
+    private List<Pets> dataNews =new ArrayList<>();
     private NewsAdapter adapter;
     private Api api;
     private ProgressBar progressBar;
@@ -43,21 +44,42 @@ public class NewsFragment extends Fragment{
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
+        initData();
     }
 
     private void initView() {
         adapter = new NewsAdapter(getContext());
         rvNews = getActivity().findViewById(R.id.rv_news);
         rvNews.setAdapter(adapter);
+    }
+    private void initData() {
+        ApiBuilder.getInstance().getPets().enqueue(new Callback<ArrayList<Pets>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Pets>> call, Response<ArrayList<Pets>> response) {
+                dataNews = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Pets>> call, Throwable t) {
+
+            }
+        });
         adapter.setData(dataNews);
     }
 
-    public void setData(ArrayList<Pets> data) {
+    public void setDataNews(ArrayList<Pets> data) {
+        this.adapter.setData(data);
         this.dataNews = data;
-        adapter.setData(data);
+
     }
 
     public void getPets(){

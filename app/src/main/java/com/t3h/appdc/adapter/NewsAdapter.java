@@ -36,7 +36,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
     @NonNull
     @Override
     public NewsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = inflater.inflate(R.layout.items_new , parent , false);
+        View v = inflater.inflate(R.layout.item_main , parent , false);
         return new NewsHolder(v);
     }
 
@@ -74,7 +74,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
             Glide.with(imPet)
                     .load(p.getPicture())
                     .placeholder(R.mipmap.ic_launcher)
-                    .error(android.R.drawable.ic_delete)
+                    .error(R.drawable.ic_adb_black_24dp)
                     .into(imPet);
         }
 

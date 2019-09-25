@@ -6,9 +6,12 @@
     android:layout_height="match_parent"
     android:background="@drawable/ic_bg">
     <TextView
+        android:paddingHorizontal="5dp"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="Newss"/>
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="Bài viết"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_news"
         android:layout_width="match_parent"
