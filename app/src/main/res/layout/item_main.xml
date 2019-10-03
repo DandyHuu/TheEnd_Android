@@ -79,7 +79,7 @@
                 android:background="@drawable/border_top_1dp"
                 android:orientation="horizontal">
 
-               <ImageButton
+               <ImageView
                    android:layout_marginHorizontal="5dp"
                    android:id="@+id/imgbtn_like_news"
                    android:padding="5dp"
@@ -89,8 +89,6 @@
                    android:src="@drawable/heart"
                    android:background="@drawable/border_radius_12dp"
                    android:backgroundTint="#81ACACAC"
-
-                   android:tint="#353535"
                    />
                 <ImageButton
                     android:layout_marginHorizontal="5dp"

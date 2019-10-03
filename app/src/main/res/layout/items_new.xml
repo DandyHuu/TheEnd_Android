@@ -37,17 +37,31 @@
                     android:layout_height="wrap_content"
                     android:gravity="left|bottom"
                     android:text="Mai Anh"
+                    android:padding="10dp"
                     android:textColor="#E91E63"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_gener"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="left|bottom"
                     android:text="Girl"
                     android:textColor="#000"
+                    android:padding="10dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_birth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="7 months"
+                    android:textColor="#fff"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -102,32 +116,6 @@
                 android:layout_alignBottom="@id/im_picture"
 
                 android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_birth"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="7 months"
-                    android:textColor="#fff"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/btn_profile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:padding="10dp"
-                    android:background="#4CAF50"
-                    android:text="Thông tin >>"
-                    android:textColor="#fff"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
 
             </LinearLayout>
         </RelativeLayout>

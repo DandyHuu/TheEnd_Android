@@ -33,10 +33,10 @@ public class ShareAdapter {
         }
         public void bindData(Pets pet){
             tvNamePet.setText(pet.getName());
-            tvAgePet.setText(getAge(pet.getBirh()) +" tuổi");
+            tvAgePet.setText(getAge(pet.getBirth()) +" tuổi");
             tvIDPet.setText(pet.getId()+"");
             tvMaster.setText(pet.getMessage());
-            if (pet.isGender() == true) {
+            if (pet.getGender() == 1) {
                 Glide.with(imGender)
                         .load(R.drawable.man)
                         .placeholder(R.mipmap.ic_launcher)

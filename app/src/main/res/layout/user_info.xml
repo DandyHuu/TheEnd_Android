@@ -16,34 +16,42 @@
                 android:paddingBottom="20dp">
 
                 <RelativeLayout
-                    android:id="@+id/imgUser"
+                    android:id="@+id/bg_imguser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/circle_border">
 
-                    <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgUser"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
                         android:layout_margin="9dp"
-                        android:adjustViewBounds="true"
-                        android:background="@drawable/circle"
-                        android:padding="3dp"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/ic_users" />
+                        android:src="@drawable/anh" />
 
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_below="@+id/imgUser"
+                        android:layout_marginTop="-55dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        android:layout_alignRight="@+id/imgUser"
+                        android:src="@drawable/ic_picture"
+                        android:tint="#3F51B5" />
                 </RelativeLayout>
 
-                <TextView
+                <EditText
                     android:id="@+id/tv_name_user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/imgUser"
+                    android:layout_below="@+id/bg_imguser"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15sp"
                     android:fontFamily="sans-serif-light"
-                    android:text="User Name"
+                    android:background="#00FFFFFF"
+                    android:text="MINH O-CC-HO"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="24dp" />
@@ -51,15 +59,7 @@
 
 
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="15dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_setting" />
+
 
             </RelativeLayout>
 
@@ -178,22 +178,18 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             >
-                            <TextView
+                            <EditText
                                 android:id="@+id/tv_email_user"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-light"
+                                android:enabled="true"
                                 android:text="vuvanminh102@gmail.com"
+                                android:background="@android:color/transparent"
                                 android:textColor="#000000"
                                 android:textSize="16sp" />
 
-                            <Button
-                                android:id="@+id/btn_updateEmail"
-                                android:layout_alignParentRight="true"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@drawable/ic_settings_backup_restore_black_24dp"
-                                android:backgroundTint="#2196F3"/>
+
                         </RelativeLayout>
 
                         <View
@@ -220,21 +216,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             >
-                            <TextView
+                            <EditText
+                                android:background="@android:color/transparent"
                                 android:id="@+id/tv_phone_user"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:enabled="true"
                                 android:fontFamily="sans-serif-light"
                                 android:text="01234566789"
                                 android:textColor="#000000"
                                 android:textSize="16sp" />
-                            <Button
-                                android:id="@+id/btn_updatePhone"
-                                android:layout_alignParentRight="true"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@drawable/ic_settings_backup_restore_black_24dp"
-                                android:backgroundTint="#2196F3"/>
+
                         </RelativeLayout>
 
 
@@ -262,22 +254,19 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             >
-                            <TextView
+                            <EditText
                                 android:id="@+id/tv_address_user"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-light"
                                 android:text="Hà nội"
+                                android:enabled="true"
                                 android:textColor="#000000"
+                                android:background="@android:color/transparent"
+                                android:theme="@style/Theme.Design.NoActionBar"
                                 android:textSize="16sp" />
 
-                            <Button
-                                android:id="@+id/btn_updateAddress"
-                                android:layout_alignParentRight="true"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@drawable/ic_settings_backup_restore_black_24dp"
-                                android:backgroundTint="#2196F3"/>
+
                         </RelativeLayout>
 
                         <View
@@ -303,21 +292,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             >
-                            <TextView
+                            <EditText
                                 android:id="@+id/tv_birth_user"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-light"
                                 android:text="30-02-1999"
+                                android:enabled="true"
+                                android:background="@android:color/transparent"
                                 android:textColor="#000000"
                                 android:textSize="16sp" />
-                            <Button
-                                android:id="@+id/btn_updateBirth"
-                                android:layout_alignParentRight="true"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@drawable/ic_settings_backup_restore_black_24dp"
-                                android:backgroundTint="#2196F3"/>
+
                         </RelativeLayout>
 
 
@@ -345,21 +330,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             >
-                            <TextView
+                            <EditText
                                 android:id="@+id/tv_facebook_user"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-light"
                                 android:text="facebook.com"
+                                android:enabled="true"
+                                android:background="@android:color/transparent"
                                 android:textColor="#000000"
                                 android:textSize="16sp" />
-                            <Button
-                                android:id="@+id/btn_updateFace"
-                                android:layout_alignParentRight="true"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@drawable/ic_settings_backup_restore_black_24dp"
-                                android:backgroundTint="#2196F3"/>
+
                         </RelativeLayout>
 
 
@@ -379,7 +360,28 @@
                     android:layout_height="200dp"
                     android:orientation="vertical"
                     android:layout_below="@+id/layoutinfo"
-                    />
+                    android:paddingHorizontal="20dp"
+                    >
+                    <Button
+                        android:id="@+id/btn_updateFace"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Cập nhật"
+                        android:textColor="#fff"
+                        android:paddingHorizontal="6dp"
+                        android:background="#2196F3"/>
+                    <Button
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/btn_logOut"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Đăng xuất"
+                        android:textColor="#0E0D0D"
+                        android:paddingHorizontal="6dp"
+                        android:background="#ECEEF0"/>
+                </LinearLayout>
 
             </RelativeLayout>
 

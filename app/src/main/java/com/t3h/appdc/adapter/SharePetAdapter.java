@@ -70,7 +70,7 @@ public class SharePetAdapter extends RecyclerView.Adapter<SharePetAdapter.ShareP
 
         public void bindData(Pets p){
             tvNamePet.setText(p.getName());
-            tvAge.setText(p.getBirh()+"");
+            tvAge.setText(p.getBirth());
             tvCate.setText(p.getSpecies());
             Glide.with(imgPet)
                     .load(p.getPicture())

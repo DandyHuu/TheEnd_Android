@@ -1,9 +1,9 @@
 package com.t3h.appdc.api;
 
+import com.t3h.appdc.model.User;
 import com.t3h.appdc.model.Pets;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -54,4 +54,17 @@ public interface Api {
             @Field("key") String key,
             @Field("id") int id,
             @Field("love") boolean love);
+
+    @FormUrlEncoded
+    @POST("login.php")
+    Call<ArrayList<User>> login(@Field("username") String username,
+                                @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("regester.php")
+    Call<User> regester(
+            @Field("username") String username,
+            @Field("password") String password,
+            @Field("email") String email,
+            @Field("phone") String phone);
 }

@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ProgressDialog progressDialog;
 
+
     private ImageButton imgbtnHome, imgbtnPet, imgbtnNew, imgbtnNoti, imgbtnUser;
     private LinearLayout lnHome, lnPets, lnNotifi, lnUser;
 
@@ -88,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adapter = new ViewPagerAdapter(getSupportFragmentManager(), fms);
         viewPager.setAdapter(adapter);
 //        tabLayout.setupWithViewPager(viewPager);
-        getPets();
 
 
         imgbtnHome = findViewById(R.id.imgbtn_home);
@@ -112,6 +113,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lnPets.setOnClickListener(this);
         lnNotifi.setOnClickListener(this);
         lnUser.setOnClickListener(this);
+        imgbtnHome.setImageResource(R.drawable.homeactive);
+
+        progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.setMessage("Searching...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+        getPets();
+
+
     }
 
     private void getPets(){
@@ -121,10 +131,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dataNews=response.body();
                 frmNews.setDataNews(dataNews);
                 frmShare.setDataShare(dataNews);
+                progressDialog.dismiss();
+
             }
 
             @Override
             public void onFailure(Call<ArrayList<Pets>> call, Throwable t) {
+                progressDialog.dismiss();
 
             }
         });
@@ -216,4 +229,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             drawer.closeDrawers();
         }
     }
+
+    public ImageButton getImgbtnHome() {
+        return imgbtnHome;
+    }
+
+    public ImageButton getImgbtnPet() {
+        return imgbtnPet;
+    }
+
+    public ImageButton getImgbtnNew() {
+        return imgbtnNew;
+    }
+
+    public ImageButton getImgbtnNoti() {
+        return imgbtnNoti;
+    }
+
+    public ImageButton getImgbtnUser() {
+        return imgbtnUser;
+    }
+
+
 }

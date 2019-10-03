@@ -14,9 +14,9 @@ public class Pets implements Serializable {
     @SerializedName("breed")
     private String breed;
     @SerializedName("gender")
-    private boolean gender;
-    @SerializedName("birh")
-    private String birh;
+    private int gender;
+    @SerializedName("birth")
+    private String birth;
     @SerializedName("picture")
     private String picture;
     @SerializedName("love")
@@ -58,20 +58,20 @@ public class Pets implements Serializable {
         this.breed = breed;
     }
 
-    public boolean isGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(boolean gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
-    public String getBirh() {
-        return birh;
+    public String getBirth() {
+        return birth;
     }
 
-    public void setBirh(String birh) {
-        this.birh = birh;
+    public void setBirth(String birth) {
+        this.birth = birth;
     }
 
     public String getPicture() {

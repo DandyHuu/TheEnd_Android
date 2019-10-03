@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.t3h.appdc.MainActivity;
 import com.t3h.appdc.R;
 
 public class EditorFragment extends Fragment {
@@ -22,5 +23,15 @@ public class EditorFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+
     }
+
+//    @Override
+//    public void onResume() {
+//        MainActivity m = (MainActivity) getActivity();
+//        m.setNoActibve();
+//        m.getImgbtnNew().setImageResource(R.drawable.plusactive);
+//        super.onResume();
+//    }
 }

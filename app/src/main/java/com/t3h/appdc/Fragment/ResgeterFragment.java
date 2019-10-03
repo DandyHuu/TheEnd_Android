@@ -1,11 +1,14 @@
 package com.t3h.appdc.Fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,16 +16,22 @@ import androidx.fragment.app.Fragment;
 
 import com.t3h.appdc.LoginActivity;
 import com.t3h.appdc.R;
+import com.t3h.appdc.api.ApiBuilder;
+import com.t3h.appdc.model.User;
 
-public class ResgeterFragment extends Fragment implements View.OnClickListener {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-    private EditText edtUserRe, edtPassRe, edtPhoneRe;
+public class ResgeterFragment extends Fragment implements View.OnClickListener, onBackPress {
+
+    private EditText edtUserRe, edtPassRe, edtPhoneRe, edMail;
     private Button btnRes;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_register, container ,false);
+        View v = inflater.inflate(R.layout.register, container ,false);
         return v;
 
     }
@@ -34,18 +43,19 @@ public class ResgeterFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initView() {
-        edtUserRe = getActivity().findViewById(R.id.ed_username_re);
-        edtPassRe = getActivity().findViewById(R.id.ed_pass_re);
-        edtPhoneRe = getActivity().findViewById(R.id.ed_phone_re);
-
-        btnRes = getActivity().findViewById(R.id.btn_dangky_re);
+        edtUserRe = getActivity().findViewById(R.id.ed_username_rg);
+        edtPassRe = getActivity().findViewById(R.id.ed_password_rg);
+        edtPhoneRe = getActivity().findViewById(R.id.ed_phone_rg);
+        edMail = getActivity().findViewById(R.id.ed_email_rg);
+        btnRes = getActivity().findViewById(R.id.btn_singup_rg);
         btnRes.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.btn_dangky_re:
+            case R.id.btn_singup_rg:
+                String email = edMail.getText().toString();
                 String pass_re = edtPassRe.getText().toString();
                 String phone = edtPhoneRe.getText().toString();
                 String user_re = edtUserRe.getText().toString();
@@ -59,16 +69,57 @@ public class ResgeterFragment extends Fragment implements View.OnClickListener {
                     edtPassRe.setError("Vui lòng điền mật khẩu!");
                     return;
                 }
+                if (email.isEmpty()) {
+                    edMail.requestFocus();
+                    edMail.setError("Vui lòng điền email của bạn!");
+                    return;
+                }
                 if (phone.isEmpty()) {
                     edtPhoneRe.requestFocus();
                     edtPhoneRe.setError("Vui lòng điền số điện thoại!");
                     return;
                 }
+                final ProgressDialog progressDialog = new ProgressDialog(getContext());
+                progressDialog.setMessage("Wating...");
+                progressDialog.show();
+                ApiBuilder.getInstance().regester(user_re,pass_re,email,phone).enqueue(new Callback<User>() {
+
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        if (response.isSuccessful() == true) {
+                            Log.i(ResgeterFragment.class.getSimpleName(), response.toString());
+                            Toast.makeText(getContext(), "OK", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(getContext(),"Lỗi đăng ký tài khoản!)",Toast.LENGTH_SHORT).show();
+                        }
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        progressDialog.dismiss();
+                        return;
+                    }
+
+                });
+
+
                 LoginActivity login = (LoginActivity) getActivity();
                 login.showFragment(login.getFrmLogin());
+                LoginFragment frmLogin = login.getFrmLogin();
+                frmLogin.getEdUser().setText(user_re);
+                frmLogin.getEdPass().setText(pass_re);
                 break;
             default:
                 break;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        LoginActivity login = (LoginActivity) getActivity();
+        login.showFragment(login.getFrmLogin());
+    }
+
 }

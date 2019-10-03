@@ -21,6 +21,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.t3h.appdc.ItemActivity;
+import com.t3h.appdc.LoginActivity;
 import com.t3h.appdc.MainActivity;
 import com.t3h.appdc.R;
 
@@ -152,7 +153,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void launchHomeScreen() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }

@@ -31,11 +31,11 @@ import retrofit2.Response;
 
 public class NewsFragment extends Fragment{
     private RecyclerView rvNews;
-    private List<Pets> dataNews =new ArrayList<>();
+    private ArrayList<Pets> dataNews;
     private NewsAdapter adapter;
     private Api api;
     private ProgressBar progressBar;
-    private NewsAdapter.OnClickPet listener;
+    private NewsAdapter.RecyclerViewClickListener listener;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,7 +60,17 @@ public class NewsFragment extends Fragment{
         adapter = new NewsAdapter(getContext());
         rvNews = getActivity().findViewById(R.id.rv_news);
         rvNews.setAdapter(adapter);
+
     }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        MainActivity m = (MainActivity) getActivity();
+//        m.setNoActibve();
+//        m.getImgbtnHome().setImageResource(R.drawable.homeactive);
+//    }
+
     private void initData() {
         ApiBuilder.getInstance().getPets().enqueue(new Callback<ArrayList<Pets>>() {
             @Override

@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.t3h.appdc.MainActivity;
 import com.t3h.appdc.R;
 import com.t3h.appdc.adapter.SharePetAdapter;
 import com.t3h.appdc.api.ApiBuilder;
@@ -43,7 +44,17 @@ public class ShareFragment extends Fragment {
         adapterS = new SharePetAdapter(getContext());
         rvShare = getActivity().findViewById(R.id.rv_share);
         rvShare.setAdapter(adapterS);
+
     }
+
+//    @Override
+//    public void onResume() {
+//        MainActivity m = (MainActivity) getActivity();
+//        m.setNoActibve();
+//        m.getImgbtnPet().setImageResource(R.drawable.pawprintactive);
+//        super.onResume();
+//    }
+
     private void initData() {
         ApiBuilder.getInstance().getPets().enqueue(new Callback<ArrayList<Pets>>() {
             @Override
