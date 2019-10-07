@@ -55,8 +55,8 @@ public interface Api {
             @Field("id") int id,
             @Field("love") boolean love);
 
-    @FormUrlEncoded
     @POST("login.php")
+    @FormUrlEncoded
     Call<ArrayList<User>> login(@Field("username") String username,
                                 @Field("password") String password);
 

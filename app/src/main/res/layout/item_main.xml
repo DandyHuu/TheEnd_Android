@@ -3,9 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
     <androidx.cardview.widget.CardView
+        android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_marginVertical="5dp"
         android:padding="3dp"
@@ -15,61 +16,63 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="2dp"
             android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/im_picture_news"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:src="@drawable/anh" />
-
             <LinearLayout
-                android:padding="7dp"
                 android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingHorizontal="15dp">
-
+                android:layout_height="64dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/anh"/>
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:gravity="center"
-                        android:id="@+id/tv_namePets_news"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:lines="1"
-                        android:text="Minh KUN"
-                        android:textSize="18sp"
-                        android:textColor="#501CAD"
-                        android:textStyle="bold"
-                        />
-                    <ImageView
-                        android:id="@+id/im_gender_news"
-                        android:paddingHorizontal="5dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/man"
-                        android:scaleType="center"
-                        />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_age_news"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="left|bottom"
-                    android:text="Tuổi: 3thang"
-                    android:textColor="#000"
-                    android:textSize="16sp"
-                     />
+                    android:paddingHorizontal="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="UserName"
+                        android:textStyle="bold"
+                        android:textColor="#2196F3"
+                        android:textSize="20sp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1 giay truoc"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_top_1dp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less"
+                    android:lines="2"
+                    android:padding="7dp"
+                    android:ellipsize="end"
+                    />
+                <ImageView
+                    android:id="@+id/im_picture_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/anh" />
+            </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ln_date"
                 android:layout_width="match_parent"
@@ -88,8 +91,7 @@
                    android:layout_height="wrap_content"
                    android:src="@drawable/heart"
                    android:background="@drawable/border_radius_12dp"
-                   android:backgroundTint="#81ACACAC"
-                   />
+                   android:backgroundTint="#61ACACAC"                   />
                 <ImageButton
                     android:layout_marginHorizontal="5dp"
                     android:id="@+id/imgbtn_comment_news"
@@ -99,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/chat"
                     android:background="@drawable/border_radius_12dp"
-                    android:backgroundTint="#81ACACAC"
+                    android:backgroundTint="#61ACACAC"
                     android:tint="#353535"
                     />
                 <ImageButton
@@ -111,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/share"
                     android:background="@drawable/border_radius_12dp"
-                    android:backgroundTint="#81ACACAC"
+                    android:backgroundTint="#61ACACAC"
                     android:tint="#353535"
                     />
 

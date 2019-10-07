@@ -60,14 +60,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_dangnhap:
-                String username = edUser.getText().toString();
-                String pass = edPass.getText().toString();
+                String username = edUser.getText().toString().trim();
+                String password = edPass.getText().toString().trim();
+//                username.trim();
+//                password.trim();
                 if (username.isEmpty()) {
                     edUser.requestFocus();
                     edUser.setError("Vui lòng điền tên đăng nhập!");
                     return;
                 }
-                if (pass.isEmpty()) {
+                if (password.isEmpty()) {
                     edPass.requestFocus();
                     edPass.setError("Vui lòng điền mật khẩu!");
                     return;
@@ -75,41 +77,40 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 final ProgressDialog progressDialog = new ProgressDialog(getContext());
                 progressDialog.setMessage("Wating...");
                 progressDialog.show();
-                ApiBuilder.getInstance().login(username,pass).enqueue(new Callback<ArrayList<User>>() {
+
+                ApiBuilder.getInstance().login(username,password).enqueue(new Callback<ArrayList<User>>() {
                     @Override
                     public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
                         userData = response.body();
+                        if (userData != null && userData.size()> 0 ) {
+                            Intent main = new Intent(getActivity(), MainActivity.class);
+                            main.putExtra(Const.EXTRA_USERNAME,userData.get(0).getUsername());
+                            main.putExtra(Const.EXTRA_EMAIL,userData.get(0).getEmail());
+                            main.putExtra(Const.EXTRA_ADDRESS,userData.get(0).getAddress());
+                            main.putExtra(Const.EXTRA_BIRTH,userData.get(0).getBirth());
+                            main.putExtra(Const.EXTRA_PHONE,userData.get(0).getPhone());
+                            main.putExtra(Const.EXTRA_FACE,userData.get(0).getFace());
+                            main.putExtra(Const.EXTRA_PASS,userData.get(0).getPass());
+                            main.putExtra(Const.EXTRA_AVARTAR,userData.get(0).getAvatar());
+                            startActivity(main);
+
+                            LoginActivity loginFinish = new LoginActivity();
+                            loginFinish.finish();
+                        }
+                        else {
+                            Toast.makeText(getContext(),"Sai tên tài khoản hoặc mật khẩu!(003)",Toast.LENGTH_SHORT).show();
+                        }
                         progressDialog.dismiss();
+
                     }
 
                     @Override
                     public void onFailure(Call<ArrayList<User>> call, Throwable t) {
                         Toast.makeText(getContext(),"Sai tên tài khoản hoặc mật khẩu!(001)",Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
                         return;
                     }
                 });
-
-
-                if (userData != null && userData.size()>0 ) {
-                    Intent main = new Intent(getActivity(), MainActivity.class);
-                    main.putExtra(Const.EXTRA_USERNAME,userData.get(0).getUsername());
-                    main.putExtra(Const.EXTRA_EMAIL,userData.get(0).getEmail());
-                    main.putExtra(Const.EXTRA_ADDRESS,userData.get(0).getAddress());
-                    main.putExtra(Const.EXTRA_BIRTH,userData.get(0).getBirth());
-                    main.putExtra(Const.EXTRA_PHONE,userData.get(0).getPhone());
-                    main.putExtra(Const.EXTRA_FACE,userData.get(0).getFace());
-                    main.putExtra(Const.EXTRA_PASS,userData.get(0).getPass());
-                    main.putExtra(Const.EXTRA_AVARTAR,userData.get(0).getAvatar());
-                    startActivity(main);
-
-                    LoginActivity loginFinish = new LoginActivity();
-                    loginFinish.finish();
-                }
-                else {
-                    Toast.makeText(getContext(),"Sai tên tài khoản hoặc mật khẩu!(003)",Toast.LENGTH_SHORT).show();
-                }
-
-
                 break;
             case R.id.btn_dangky:
                 LoginActivity login = (LoginActivity) getActivity();

@@ -55,10 +55,10 @@ public class ResgeterFragment extends Fragment implements View.OnClickListener, 
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_singup_rg:
-                String email = edMail.getText().toString();
-                String pass_re = edtPassRe.getText().toString();
-                String phone = edtPhoneRe.getText().toString();
-                String user_re = edtUserRe.getText().toString();
+                final String email = edMail.getText().toString();
+                final String pass_re = edtPassRe.getText().toString();
+                final String phone = edtPhoneRe.getText().toString();
+                final String user_re = edtUserRe.getText().toString();
                 if (user_re.isEmpty()) {
                     edtUserRe.requestFocus();
                     edtUserRe.setError("Vui lòng điền tên đăng nhập!");
@@ -89,9 +89,14 @@ public class ResgeterFragment extends Fragment implements View.OnClickListener, 
                         if (response.isSuccessful() == true) {
                             Log.i(ResgeterFragment.class.getSimpleName(), response.toString());
                             Toast.makeText(getContext(), "OK", Toast.LENGTH_SHORT).show();
+                            LoginActivity login = (LoginActivity) getActivity();
+                            login.showFragment(login.getFrmLogin());
+                            LoginFragment frmLogin = login.getFrmLogin();
+                            frmLogin.getEdUser().setText(user_re);
+                            frmLogin.getEdPass().setText(pass_re);
                         }
                         else {
-                            Toast.makeText(getContext(),"Lỗi đăng ký tài khoản!)",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),"Lỗi đăng ký tài khoản!(001)",Toast.LENGTH_SHORT).show();
                         }
                         progressDialog.dismiss();
                     }
@@ -99,17 +104,14 @@ public class ResgeterFragment extends Fragment implements View.OnClickListener, 
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
                         progressDialog.dismiss();
+                        Toast.makeText(getContext(),"Lỗi đăng ký tài khoản!(002)",Toast.LENGTH_SHORT).show();
                         return;
                     }
 
                 });
 
 
-                LoginActivity login = (LoginActivity) getActivity();
-                login.showFragment(login.getFrmLogin());
-                LoginFragment frmLogin = login.getFrmLogin();
-                frmLogin.getEdUser().setText(user_re);
-                frmLogin.getEdPass().setText(pass_re);
+
                 break;
             default:
                 break;
