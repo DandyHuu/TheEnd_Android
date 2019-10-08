@@ -1,5 +1,6 @@
 package com.t3h.appdc;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -16,7 +18,18 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.t3h.appdc.Fragment.EditorFragment;
 import com.t3h.appdc.Fragment.LoginFragment;
 import com.t3h.appdc.Fragment.NewsFragment;
@@ -28,8 +41,14 @@ import com.t3h.appdc.adapter.ViewPagerAdapter;
 import com.t3h.appdc.api.ApiBuilder;
 import com.t3h.appdc.model.Pets;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,6 +76,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ImageButton imgbtnHome, imgbtnPet, imgbtnNew, imgbtnNoti, imgbtnUser;
     private LinearLayout lnHome, lnPets, lnNotifi, lnUser;
+
+//    Firebase message
+    private ArrayList<String> arrToken = new ArrayList<>();
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference reference = database.getReference("Notification");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,10 +203,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 imgbtnPet.setImageResource(R.drawable.pawprintactive);
                 break;
             case R.id.imgbtn_new:
-                if (viewPager != null) {
-                    viewPager.setCurrentItem(2,false);
-                }
-            setNoActibve();
+//                if (viewPager != null) {
+//                    viewPager.setCurrentItem(2,false);
+//                }
+                Intent edit = new Intent(this, EditorActivity.class);
+                startActivity(edit);
+                setNoActibve();
                 imgbtnNew.setImageResource(R.drawable.plusactive);
                 break;
             case R.id.imgbtn_notifile:
@@ -250,5 +276,75 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return imgbtnUser;
     }
 
+    public void getToken(){
+        database.getReference("Token").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                arrToken.clear();
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    String token = snapshot.getValue(String.class);
+                    arrToken.add(token);
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    private void sendFCM(String user, String message){
+
+        try {
+            final JSONObject object = new JSONObject();
+            JSONArray arr = new JSONArray(arrToken);
+            object.put("registration_ids", arr);
+            JSONObject notification = new JSONObject();
+            notification.put("body", message);
+            notification.put("title", user);
+            object.put("notification", notification);
+
+            StringRequest request = new StringRequest(
+                    Request.Method.POST,
+                    "https://fcm.googleapis.com/fcm/send",
+                    new com.android.volley.Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                        }
+                    },
+                    new com.android.volley.Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            String err = new String(error.networkResponse.data);
+                            int a = 3;
+                        }
+                    })
+            {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<>();
+                    headers.put("Content-Type", "application/json");
+                    headers.put("Authorization", "key=AIzaSyAsjZ8nC459jb-4GNma2StMDTJXOe_KFe8");
+                    return headers;
+                }
+
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    String s = object.toString();
+                    return s.getBytes();
+                }
+
+                @Override
+                public String getBodyContentType() {
+                    return "application/json; charset=utf-8";
+                }
+            };
+
+            RequestQueue queue = Volley.newRequestQueue(this);
+            queue.add(request);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 }

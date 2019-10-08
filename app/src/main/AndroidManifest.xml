@@ -27,8 +27,9 @@
         <activity android:name=".LoginActivity"/>
         <activity android:name=".MainActivity"
             android:theme="@style/AppTheme.FullScreen"/>
-<!--        <activity android:name=".EditorActivity"/>-->
-<!--        <activity android:name=".MainActivity"/>-->
+        <activity android:name=".EditorActivity"/>
+        <activity android:name=".ProfileActivity"
+            android:theme="@style/AppTheme.FullScreen"/>
     </application>
 
 </manifest>

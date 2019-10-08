@@ -22,7 +22,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:orientation="horizontal"
-                android:layout_marginBottom="5dp">
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:paddingHorizontal="10dp">
                 <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
@@ -60,7 +62,8 @@
                     android:layout_height="wrap_content"
                     android:text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less"
                     android:lines="2"
-                    android:padding="7dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="7dp"
                     android:ellipsize="end"
                     />
                 <ImageView

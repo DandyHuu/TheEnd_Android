@@ -71,24 +71,24 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
         public NewsHolder(@NonNull View itemView) {
             super(itemView);
             imPet = itemView.findViewById(R.id.im_picture_news);
-            tvBirth = itemView.findViewById(R.id.tv_age_news);
-            tvName = itemView.findViewById(R.id.tv_namePets_news);
-            imgGender = itemView.findViewById(R.id.im_gender_news);
+//            tvBirth = itemView.findViewById(R.id.tv_age_news);
+//            tvName = itemView.findViewById(R.id.tv_namePets_news);
+//            imgGender = itemView.findViewById(R.id.im_gender_news);
             imLove = itemView.findViewById(R.id.imgbtn_like_news);
         }
         public void bindData(Pets p){
-            tvName.setText(p.getName());
+//            tvName.setText(p.getName());
+////
+//            String gen = "";
+//            if (p.getGender() == 1) {
+//                imgGender.setImageResource(R.drawable.man);
+//            }else if (p.getGender() == 2) {
+//                imgGender.setImageResource(R.drawable.female);
+//            }else {
+//                imgGender.setImageResource(R.drawable.ic_adb_black_24dp);
+//            }
 //
-            String gen = "";
-            if (p.getGender() == 1) {
-                imgGender.setImageResource(R.drawable.man);
-            }else if (p.getGender() == 2) {
-                imgGender.setImageResource(R.drawable.female);
-            }else {
-                imgGender.setImageResource(R.drawable.ic_adb_black_24dp);
-            }
-
-            tvBirth.setText(p.getBirth());
+//            tvBirth.setText(p.getBirth());
 
             if (p.isLove() == true) {
                 imLove.setImageResource(R.drawable.heart_1);

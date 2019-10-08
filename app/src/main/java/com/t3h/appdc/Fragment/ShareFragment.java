@@ -1,5 +1,6 @@
 package com.t3h.appdc.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.t3h.appdc.ConstPet;
 import com.t3h.appdc.MainActivity;
+import com.t3h.appdc.ProfileActivity;
 import com.t3h.appdc.R;
 import com.t3h.appdc.adapter.SharePetAdapter;
 import com.t3h.appdc.api.ApiBuilder;
@@ -22,7 +25,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ShareFragment extends Fragment {
+public class ShareFragment extends Fragment implements SharePetAdapter.OnClickPet {
     private RecyclerView rvShare;
     private ArrayList<Pets> dataShare;
     private SharePetAdapter adapterS;
@@ -44,6 +47,7 @@ public class ShareFragment extends Fragment {
         adapterS = new SharePetAdapter(getContext());
         rvShare = getActivity().findViewById(R.id.rv_share);
         rvShare.setAdapter(adapterS);
+        adapterS.setListenner(this);
 
     }
 
@@ -74,5 +78,18 @@ public class ShareFragment extends Fragment {
         this.adapterS.setData(data);
         this.dataShare = data;
 
+    }
+
+    @Override
+    public void OnClickItem(int position) {
+        Intent detail = new Intent(getContext(), ProfileActivity.class);
+        detail.putExtra(ConstPet.EXTRA_NAME_PET, dataShare.get(position).getName());
+        detail.putExtra(ConstPet.EXTRA_ABOUT_PET, dataShare.get(position).getMessage());
+        detail.putExtra(ConstPet.EXTRA_BIRTH_PET, dataShare.get(position).getBirth());
+        detail.putExtra(ConstPet.EXTRA_GENDER_PET, dataShare.get(position).getGender());
+        detail.putExtra(ConstPet.EXTRA_IMAGE_PET, dataShare.get(position).getPicture());
+        detail.putExtra(ConstPet.EXTRA_SPECIES_PET, dataShare.get(position).getSpecies());
+
+        startActivity(detail);
     }
 }

@@ -47,8 +47,17 @@ public class SharePetAdapter extends RecyclerView.Adapter<SharePetAdapter.ShareP
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SharePetHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SharePetHolder holder, final int position) {
         holder.bindData(data.get(position));
+
+        if (listenner != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listenner.OnClickItem(position);
+                }
+            });
+        }
     }
 
     @Override

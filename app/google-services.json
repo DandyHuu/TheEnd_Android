@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "141166619252",
+    "firebase_url": "https://petstore-da93b.firebaseio.com",
+    "project_id": "petstore-da93b",
+    "storage_bucket": "petstore-da93b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141166619252:android:35bab305f5659c868bff21",
+        "android_client_info": {
+          "package_name": "com.t3h.appdc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "141166619252-2qpmqdrgthrisof6953j98a90ku589pm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8m6_dwMAn_7iH1dWPLl9wEGBmJHoc_wM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "141166619252-2qpmqdrgthrisof6953j98a90ku589pm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

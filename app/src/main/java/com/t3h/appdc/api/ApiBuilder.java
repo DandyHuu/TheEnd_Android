@@ -10,8 +10,8 @@ public class ApiBuilder {
     public static Retrofit getInstan(){
         if (retrofit == null) {
 //            retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl("http://192.168.0.104/demo_pets/").build();
-//            retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl("http://192.168.82.102:88/demo_pets/").build();
-            retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl("http://10.252.116.231:88/demo_pets/").build();
+            retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl("http://192.168.83.102:88/demo_pets/").build();
+//            retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl("http://10.252.116.231:88/demo_pets/").build();
         }
         return retrofit;
 
@@ -20,8 +20,8 @@ public class ApiBuilder {
     public static Api getInstance(){
         if (api == null) {
 //            api = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl("http://192.168.0.104/demo_pets/").build().create(Api.class);
-//            api = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl("http://192.168.82.102:88/demo_pets/").build().create(Api.class);
-            api = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl("http://10.252.116.231:88/demo_pets/").build().create(Api.class);
+            api = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl("http://192.168.82.103:88/demo_pets/").build().create(Api.class);
+//            api = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl("http://10.252.116.231:88/demo_pets/").build().create(Api.class);
         }
         return api;
 
