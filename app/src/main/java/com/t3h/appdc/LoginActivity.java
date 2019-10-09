@@ -1,11 +1,14 @@
 package com.t3h.appdc;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -20,6 +23,17 @@ public class LoginActivity extends AppCompatActivity {
     private LoginFragment frmLogin = new LoginFragment();
     private ResgeterFragment frmResgeter = new ResgeterFragment();
     private Fragment[] fragments = {frmLogin,frmResgeter};
+    private SharedPreferences loginPreferences;
+    private InputMethodManager imm;
+
+    public InputMethodManager getImm() {
+        return imm;
+    }
+
+    public SharedPreferences getLoginPreferences() {
+        return loginPreferences;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +41,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dangnhap);
         initFragment();
         showFragment(frmLogin);
+        loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
     private void initFragment(){

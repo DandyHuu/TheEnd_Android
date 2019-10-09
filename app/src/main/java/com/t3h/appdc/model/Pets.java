@@ -7,6 +7,8 @@ import java.io.Serializable;
 public class Pets implements Serializable {
     @SerializedName("id")
     private int id;
+    @SerializedName("id_pet")
+    private int id_pet;
     @SerializedName("name")
     private String name;
     @SerializedName("species")
@@ -25,6 +27,65 @@ public class Pets implements Serializable {
     private String value;
     @SerializedName("message")
     private String message;
+    @SerializedName("fullname")
+    private String fullname;
+    @SerializedName("title")
+    private String title;
+    @SerializedName("description")
+    private String description;
+
+    public int getId_pet() {
+        return id_pet;
+    }
+
+    public void setId_pet(int id_pet) {
+        this.id_pet = id_pet;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getTimeup() {
+        return timeup;
+    }
+
+    public void setTimeup(String timeup) {
+        this.timeup = timeup;
+    }
+
+    @SerializedName("avatar")
+    private String avatar;
+    @SerializedName("timeup")
+    private String timeup;
 
     public int getId() {
         return id;

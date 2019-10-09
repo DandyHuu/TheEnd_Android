@@ -1,19 +1,25 @@
 package com.t3h.appdc.api;
 
+import com.t3h.appdc.model.Comment;
 import com.t3h.appdc.model.User;
 import com.t3h.appdc.model.Pets;
 
 import java.util.ArrayList;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface Api {
 
     @POST("get_pets.php")
     Call<ArrayList<Pets>> getPets();
+    @POST("get_baiviet.php")
+    Call<ArrayList<Pets>> getPost();
 
     @POST("get_pet_share.php")
     Call<ArrayList<Pets>> getPetsShare();
@@ -67,4 +73,32 @@ public interface Api {
             @Field("password") String password,
             @Field("email") String email,
             @Field("phone") String phone);
+
+    @POST("update_user.php")
+    @FormUrlEncoded
+    Call<ResponseBody> updateUser(@Field("username") String username,
+                                  @Field("fullname") String fullname,
+                                  @Field("email") String email,
+                                  @Field("phone") String phone,
+                                  @Field("address") String address,
+                                  @Field("face") String face,
+                                  @Field("birth") String birth
+                                  );
+
+    @POST("change_pass.php")
+    @FormUrlEncoded
+    Call<ResponseBody> changePass(@Field("passnew") String passnew,
+                                  @Field("userid") String userid);
+
+    @POST("get_comment.php")
+    @FormUrlEncoded
+    Call<ArrayList<Comment>> getComment(@Field("idbaiviet") String idbaiviet);
+
+    @POST("add_comment.php")
+    @FormUrlEncoded
+    Call<ArrayList<Comment>> addComment(@Field("username") String username,
+                                        @Field("comment") String comment,
+                                        @Field("idbaiviet") String idbaiviet
+                                        );
+
 }

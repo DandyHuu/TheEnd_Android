@@ -23,4 +23,6 @@
     <string name="gender_unknown">Không rõ</string>
     <string name="gender_male">Hoàng Thượng</string>
     <string name="gender_female">Thái Hậu</string>
+
+    <string name="more"><u>xem thêm</u></string>
 </resources>

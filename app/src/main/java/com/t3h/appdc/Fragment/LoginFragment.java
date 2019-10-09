@@ -2,11 +2,14 @@ package com.t3h.appdc.Fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -31,7 +34,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private EditText edUser, edPass;
     private Button btnLogin, btnResgeter;
     private ArrayList<User> userData;
-
+    private SharedPreferences loginPreferences;
+    private SharedPreferences.Editor loginPrefsEditor;
+    private CheckBox saveLoginCheckBox;
+    private Boolean saveLogin;
+    private InputMethodManager imm;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,14 +61,43 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         btnLogin.setOnClickListener(this);
         btnResgeter.setOnClickListener(this);
+        saveLoginCheckBox = (CheckBox)getActivity().findViewById(R.id.saveLoginCheckBox);
+        LoginActivity login = (LoginActivity) getActivity();
+        loginPreferences = login.getLoginPreferences();
+        loginPrefsEditor = loginPreferences.edit();
+
+        saveLogin = loginPreferences.getBoolean("saveLogin", false);
+        if (saveLogin == true) {
+            edUser.setText(loginPreferences.getString("username", ""));
+            edPass.setText(loginPreferences.getString("password", ""));
+            saveLoginCheckBox.setChecked(true);
+        }
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_dangnhap:
+                LoginActivity login = (LoginActivity) getActivity();
+                imm = login.getImm();
+                imm.hideSoftInputFromWindow(edUser.getWindowToken(), 0);
+
                 String username = edUser.getText().toString().trim();
                 String password = edPass.getText().toString().trim();
+
+                if (saveLoginCheckBox.isChecked()) {
+                    loginPrefsEditor.putBoolean("saveLogin", true);
+                    loginPrefsEditor.putString("username", username);
+                    loginPrefsEditor.putString("password", password);
+                    loginPrefsEditor.commit();
+                } else {
+                    loginPrefsEditor.clear();
+                    loginPrefsEditor.commit();
+                }
+
+                goMain();
+
+
 //                username.trim();
 //                password.trim();
                 if (username.isEmpty()) {
@@ -85,6 +121,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         if (userData != null && userData.size()> 0 ) {
                             Intent main = new Intent(getActivity(), MainActivity.class);
                             main.putExtra(Const.EXTRA_USERNAME,userData.get(0).getUsername());
+                            String fullname = userData.get(0).getFullname();
+                            main.putExtra(Const.EXTRA_FULLNAME,fullname);
                             main.putExtra(Const.EXTRA_EMAIL,userData.get(0).getEmail());
                             main.putExtra(Const.EXTRA_ADDRESS,userData.get(0).getAddress());
                             main.putExtra(Const.EXTRA_BIRTH,userData.get(0).getBirth());
@@ -94,7 +132,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                             main.putExtra(Const.EXTRA_AVARTAR,userData.get(0).getAvatar());
                             startActivity(main);
 
-                            LoginActivity loginFinish = new LoginActivity();
+                            LoginActivity loginFinish = (LoginActivity) getActivity();
                             loginFinish.finish();
                         }
                         else {
@@ -113,8 +151,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 });
                 break;
             case R.id.btn_dangky:
-                LoginActivity login = (LoginActivity) getActivity();
-                login.showFragment(login.getFrmResgeter());
+                LoginActivity log = (LoginActivity) getActivity();
+                log.showFragment(log.getFrmResgeter());
                 break;
             default:
                 break;
@@ -127,5 +165,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     public EditText getEdPass() {
         return edPass;
+    }
+
+    public void goMain() {
+        Intent main = new Intent(getActivity(), MainActivity.class);
+        startActivity(main);
+        LoginActivity loginFinish = (LoginActivity) getActivity();
+        loginFinish.finish();
     }
 }

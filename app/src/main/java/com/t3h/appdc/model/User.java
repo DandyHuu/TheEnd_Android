@@ -10,6 +10,9 @@ public class User implements Serializable {
     @SerializedName("username")
     private String username;
 
+    @SerializedName("fullname")
+    private String fullname;
+
     @SerializedName("password")
     private String pass;
 
@@ -34,6 +37,13 @@ public class User implements Serializable {
     @SerializedName("avatar")
     private String avatar;
 
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
 
     public String getAvatar() {
         return avatar;

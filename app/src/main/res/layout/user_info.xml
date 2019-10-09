@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/root_frame" >
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -43,7 +44,7 @@
                 </RelativeLayout>
 
                 <EditText
-                    android:id="@+id/tv_name_user"
+                    android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/bg_imguser"
@@ -162,6 +163,89 @@
                     android:layout_marginTop="20dp"
 
                     android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tài khoản"
+                            android:textColor="@color/headings"
+                            android:textSize="13sp" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            >
+                            <EditText
+                                android:id="@+id/tv_name_user"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:enabled="false"
+
+                                android:text="anhhuubgbg"
+                                android:background="@android:color/transparent"
+                                android:textColor="#000000"
+                                android:textSize="16sp" />
+
+
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="15dp"
+                            android:background="@color/grey" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mật khẩu"
+                            android:textColor="@color/headings"
+                            android:textSize="13sp" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            >
+                            <EditText
+                                android:id="@+id/tv_pass_user"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:enabled="true"
+                                android:text="**************"
+                                android:background="@android:color/transparent"
+                                android:textColor="#000000"
+                                android:textSize="16sp" />
+
+                            <ImageButton
+                                android:id="@+id/imgbtn_change_pass"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentRight="true"
+                                android:tint="#2196F3"
+                                android:src="@drawable/ic_settings_backup_restore_black_24dp"
+                                android:scaleType="fitXY"
+                                android:background="#00FFFFFF"
+                                />
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="15dp"
+                            android:background="@color/grey" />
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"

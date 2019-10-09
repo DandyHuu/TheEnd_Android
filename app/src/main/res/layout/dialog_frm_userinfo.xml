@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="5dp"
     >
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -20,82 +21,123 @@
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
-    <EditText
-        android:id="@+id/edt_frm_username"
-        android:layout_marginTop="15dp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="UserName"
-        android:padding="10dp"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="30dp"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/edt_frm_username"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="UserName"
+                android:padding="10dp"
 
-        />
-    <EditText
-        android:id="@+id/edt_frm_email"
-        android:layout_marginTop="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email"
-        android:padding="10dp"
+                />
+            <EditText
+                android:id="@+id/edt_frm_fullname"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                android:padding="10dp"
 
-        />
-    <EditText
-        android:id="@+id/edt_frm_phone"
-        android:layout_marginTop="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Phone"
-        android:padding="10dp"
+                />
+            <EditText
+                android:id="@+id/edt_frm_email"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:padding="10dp"
 
-        />
-    <EditText
-        android:id="@+id/edt_frm_address"
-        android:layout_marginTop="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Address"
-        android:padding="10dp"
+                />
+            <EditText
+                android:id="@+id/edt_frm_phone"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone"
+                android:padding="10dp"
 
-        />
-    <EditText
-        android:id="@+id/edt_frm_birth"
-        android:layout_marginTop="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Birth"
-        android:padding="10dp"
+                />
+            <EditText
+                android:id="@+id/edt_frm_address"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Address"
+                android:padding="10dp"
 
-        />
-    <EditText
-        android:id="@+id/edt_frm_face"
-        android:layout_marginTop="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Facebook"
-        android:padding="10dp"
+                />
+            <LinearLayout
+                android:layout_weight="2"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        />
-    <RelativeLayout
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="30dp"
-        >
-        <Button
-            android:id="@+id/btn_frm_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Save"
-            android:background="#2196F3"
-            android:textColor="#fff"
-            />
-        <Button
-            android:id="@+id/btn_frm_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:layout_alignParentRight="true"
-            android:background="#FF5722"
-            android:textColor="#fff"
-            />
-    </RelativeLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/edt_frm_birth"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Birth"
+                        android:padding="10dp"
+
+                        />
+                </LinearLayout>
+                <ImageView
+                    android:layout_weight="0"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_date"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/edt_frm_face"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Facebook"
+                android:padding="10dp"
+
+                />
+            <RelativeLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="30dp"
+                >
+                <Button
+                    android:id="@+id/btn_frm_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Save"
+                    android:background="#2196F3"
+                    android:textColor="#fff"
+                    />
+                <Button
+                    android:id="@+id/btn_frm_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"
+                    android:layout_alignParentRight="true"
+                    android:background="#FF5722"
+                    android:textColor="#fff"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

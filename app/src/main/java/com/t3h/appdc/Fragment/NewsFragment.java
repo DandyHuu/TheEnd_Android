@@ -1,11 +1,14 @@
 package com.t3h.appdc.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -14,6 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.t3h.appdc.Const;
 import com.t3h.appdc.MainActivity;
 import com.t3h.appdc.R;
 import com.t3h.appdc.adapter.NewsAdapter;
@@ -36,6 +41,9 @@ public class NewsFragment extends Fragment{
     private Api api;
     private ProgressBar progressBar;
     private NewsAdapter.RecyclerViewClickListener listener;
+
+    private EditText edPost;
+    private ImageView imUser;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,6 +65,17 @@ public class NewsFragment extends Fragment{
     }
 
     private void initView() {
+        edPost = getActivity().findViewById(R.id.ed_post);
+        imUser = getActivity().findViewById(R.id.img_user_post);
+        Intent get = getActivity().getIntent();
+        edPost.setFocusable(false);
+
+        Glide.with(imUser)
+                .load(get.getStringExtra(Const.EXTRA_AVARTAR))
+                .placeholder(R.drawable.ic_adb_black_24dp)
+                .error(R.drawable.avatar_dog)
+                .into(imUser);
+
         adapter = new NewsAdapter(getContext());
         rvNews = getActivity().findViewById(R.id.rv_news);
         rvNews.setAdapter(adapter);
@@ -72,7 +91,7 @@ public class NewsFragment extends Fragment{
 //    }
 
     private void initData() {
-        ApiBuilder.getInstance().getPets().enqueue(new Callback<ArrayList<Pets>>() {
+        ApiBuilder.getInstance().getPost().enqueue(new Callback<ArrayList<Pets>>() {
             @Override
             public void onResponse(Call<ArrayList<Pets>> call, Response<ArrayList<Pets>> response) {
                 dataNews = response.body();

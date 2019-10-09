@@ -1,17 +1,23 @@
 package com.t3h.appdc;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
@@ -45,6 +51,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +64,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
-
+    private Bitmap bitmap;
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private ViewPagerAdapter adapter;
@@ -140,22 +147,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imgbtnHome.setImageResource(R.drawable.homeactive);
 
         progressDialog = new ProgressDialog(MainActivity.this);
-        progressDialog.setMessage("Searching...");
+        progressDialog.setMessage("Waiting...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
+        Runnable progressRunnable = new Runnable() {
+
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+            }
+        };
+
+        Handler pdCanceller = new Handler();
+        pdCanceller.postDelayed(progressRunnable, 3000);
+
         getPets();
 
 
     }
+    public void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.root_frame, fragment);
+        fragmentTransaction.addToBackStack(fragment.toString());
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        fragmentTransaction.commit();
+    }
+
 
     private void getPets(){
-        ApiBuilder.getInstance().getPets().enqueue(new Callback<ArrayList<Pets>>() {
+        ApiBuilder.getInstance().getPost().enqueue(new Callback<ArrayList<Pets>>() {
             @Override
             public void onResponse(Call<ArrayList<Pets>> call, Response<ArrayList<Pets>> response) {
                 dataNews=response.body();
                 frmNews.setDataNews(dataNews);
                 frmShare.setDataShare(dataNews);
-                progressDialog.dismiss();
 
             }
 
@@ -345,6 +371,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             queue.add(request);
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1001) {
+            if (resultCode == RESULT_OK) {
+                Uri uri = data.getData();
+
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    UserInfoFragment u = new UserInfoFragment();
+                    u.getImUser().setImageBitmap(bitmap);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
     }
 }
