@@ -82,8 +82,8 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener {
 
         Intent get = getActivity().getIntent();
         tvNameUser.setText(get.getStringExtra(Const.EXTRA_USERNAME));
-        String fullname = get.getStringExtra(Const.EXTRA_FULLNAME).toString();
-        tvName.setText(fullname);
+        String fullname = get.getStringExtra(Const.EXTRA_FULLNAME);
+        tvName.setText(fullname+"");
         tvEmailUser.setText(get.getStringExtra(Const.EXTRA_EMAIL));
         tvPhoneUser.setText(get.getStringExtra(Const.EXTRA_PHONE));
         tvAddress.setText(get.getStringExtra(Const.EXTRA_ADDRESS));

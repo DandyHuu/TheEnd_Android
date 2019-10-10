@@ -3,7 +3,7 @@ package com.t3h.appdc;
 public class Const {
     public static String EXTRA_USERNAME = "minnnnnhhhhhhhhhhh";
 
-    public static String EXTRA_FULLNAME = "MINH O-CC-HO";
+    public static String EXTRA_FULLNAME = "EXTRA_FULLNAME";
     public static String EXTRA_EMAIL = "vuvanminh111@gmail.com";
     public static String EXTRA_PHONE = "093492432";
     public static String EXTRA_PASS = "123456";
@@ -11,7 +11,7 @@ public class Const {
     public static String EXTRA_FACE = "Membernet.facebook.com";
 
     public static String EXTRA_BIRTH = "12-03-1997";
-    public static String EXTRA_AVARTAR = "EXTRA_BIRTH";
+    public static String EXTRA_AVARTAR = "EXTRA_EMAIL";
 
 
 

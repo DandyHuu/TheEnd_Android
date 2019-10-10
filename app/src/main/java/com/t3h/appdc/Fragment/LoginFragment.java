@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private CheckBox saveLoginCheckBox;
     private Boolean saveLogin;
     private InputMethodManager imm;
+    private ProgressDialog progressDialogLg;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -78,6 +80,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_dangnhap:
+                boolean check = true;
                 LoginActivity login = (LoginActivity) getActivity();
                 imm = login.getImm();
                 imm.hideSoftInputFromWindow(edUser.getWindowToken(), 0);
@@ -86,16 +89,21 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 String password = edPass.getText().toString().trim();
 
                 if (saveLoginCheckBox.isChecked()) {
+                    edUser.setFocusable(false);
+                    edPass.setFocusable(false);
                     loginPrefsEditor.putBoolean("saveLogin", true);
                     loginPrefsEditor.putString("username", username);
                     loginPrefsEditor.putString("password", password);
                     loginPrefsEditor.commit();
+
+                    login(username,password);
+                    return;
+
                 } else {
                     loginPrefsEditor.clear();
                     loginPrefsEditor.commit();
                 }
 
-                goMain();
 
 
 //                username.trim();
@@ -110,45 +118,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     edPass.setError("Vui lòng điền mật khẩu!");
                     return;
                 }
-                final ProgressDialog progressDialog = new ProgressDialog(getContext());
-                progressDialog.setMessage("Wating...");
-                progressDialog.show();
 
-                ApiBuilder.getInstance().login(username,password).enqueue(new Callback<ArrayList<User>>() {
-                    @Override
-                    public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
-                        userData = response.body();
-                        if (userData != null && userData.size()> 0 ) {
-                            Intent main = new Intent(getActivity(), MainActivity.class);
-                            main.putExtra(Const.EXTRA_USERNAME,userData.get(0).getUsername());
-                            String fullname = userData.get(0).getFullname();
-                            main.putExtra(Const.EXTRA_FULLNAME,fullname);
-                            main.putExtra(Const.EXTRA_EMAIL,userData.get(0).getEmail());
-                            main.putExtra(Const.EXTRA_ADDRESS,userData.get(0).getAddress());
-                            main.putExtra(Const.EXTRA_BIRTH,userData.get(0).getBirth());
-                            main.putExtra(Const.EXTRA_PHONE,userData.get(0).getPhone());
-                            main.putExtra(Const.EXTRA_FACE,userData.get(0).getFace());
-                            main.putExtra(Const.EXTRA_PASS,userData.get(0).getPass());
-                            main.putExtra(Const.EXTRA_AVARTAR,userData.get(0).getAvatar());
-                            startActivity(main);
-
-                            LoginActivity loginFinish = (LoginActivity) getActivity();
-                            loginFinish.finish();
-                        }
-                        else {
-                            Toast.makeText(getContext(),"Sai tên tài khoản hoặc mật khẩu!(003)",Toast.LENGTH_SHORT).show();
-                        }
-                        progressDialog.dismiss();
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<ArrayList<User>> call, Throwable t) {
-                        Toast.makeText(getContext(),"Sai tên tài khoản hoặc mật khẩu!(001)",Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                        return;
-                    }
-                });
+                login(username,password);
                 break;
             case R.id.btn_dangky:
                 LoginActivity log = (LoginActivity) getActivity();
@@ -167,10 +138,54 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         return edPass;
     }
 
-    public void goMain() {
-        Intent main = new Intent(getActivity(), MainActivity.class);
-        startActivity(main);
-        LoginActivity loginFinish = (LoginActivity) getActivity();
-        loginFinish.finish();
+    public void login(String username,String password) {
+        progressDialogLg = new ProgressDialog(getContext());
+        progressDialogLg.setMessage("Wating...");
+        progressDialogLg.show();
+        Runnable progressRunnable = new Runnable() {
+
+            @Override
+            public void run() {
+                progressDialogLg.cancel();
+            }
+        };
+
+        Handler pdCancel = new Handler();
+        pdCancel.postDelayed(progressRunnable, 3000);
+        ApiBuilder.getInstance().login(username,password).enqueue(new Callback<ArrayList<User>>() {
+            @Override
+            public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
+                userData = response.body();
+                if (userData != null && userData.size()> 0 ) {
+                    Intent main = new Intent(getActivity(), MainActivity.class);
+                    main.putExtra(Const.EXTRA_USERNAME,userData.get(0).getUsername());
+                    String fullname = userData.get(0).getFullname();
+                    main.putExtra(Const.EXTRA_FULLNAME,fullname);
+                    main.putExtra(Const.EXTRA_EMAIL,userData.get(0).getEmail());
+                    main.putExtra(Const.EXTRA_ADDRESS,userData.get(0).getAddress());
+                    main.putExtra(Const.EXTRA_BIRTH,userData.get(0).getBirth());
+                    main.putExtra(Const.EXTRA_PHONE,userData.get(0).getPhone());
+                    main.putExtra(Const.EXTRA_FACE,userData.get(0).getFace());
+                    main.putExtra(Const.EXTRA_PASS,userData.get(0).getPass());
+                    main.putExtra(Const.EXTRA_AVARTAR,userData.get(0).getAvatar());
+                    startActivity(main);
+
+                    LoginActivity loginFinish = (LoginActivity) getActivity();
+                    loginFinish.finish();
+                }
+                else {
+                    Toast.makeText(getContext(),"Sai tên tài khoản hoặc mật khẩu!(003)",Toast.LENGTH_SHORT).show();
+                }
+                progressDialogLg.dismiss();
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<User>> call, Throwable t) {
+                Toast.makeText(getContext(),"Sai tên tài khoản hoặc mật khẩu!(001)",Toast.LENGTH_SHORT).show();
+                progressDialogLg.dismiss();
+                return;
+            }
+        });
     }
 }
