@@ -4,7 +4,7 @@ header("Content-Type: application/json; charset=UTF-8");
 
 require_once 'connect.php';
 
-$query = "SELECT b.id, b.id_user, b.id_pet, b.title, b.description, b.timeup, p.name, p.species, p.breed, p.gender, p.birth, p.picture, p.love, p.value, p.message, u.fullname, u.avatar FROM baiviet b JOIN user u ON b.id_user = u.username JOIN pet p ON b.id_pet = p.id ORDER BY b.id";
+$query = "SELECT b.id, b.id_user, b.id_pet, b.title, b.description, b.timeup, p.name, p.species, p.breed, p.gender, p.birth, p.picture, p.love, p.des, u.fullname, u.avatar FROM baiviet b JOIN user u ON b.id_user = u.username JOIN pet p ON b.id_pet = p.id ORDER BY b.id";
 $result = mysqli_query($conn, $query);
 $response = array();
 
@@ -30,8 +30,7 @@ while( $row = mysqli_fetch_assoc($result) ){
         'birth'     =>$row['birth'],
         'picture'   =>$server_name . $row['picture'],
         'love'      =>$row['love'] ,
-        'value'      =>$row['value'] ,
-        'message'      =>$row['message']) 
+        'des'      =>$row['des']) 
     );
 }
 

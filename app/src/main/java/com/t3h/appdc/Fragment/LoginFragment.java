@@ -44,7 +44,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.login, container, false);
+        View v = inflater.inflate(R.layout.fragment_login, container, false);
         return v;
     }
 

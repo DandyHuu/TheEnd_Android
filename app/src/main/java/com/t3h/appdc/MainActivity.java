@@ -235,7 +235,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                if (viewPager != null) {
 //                    viewPager.setCurrentItem(2,false);
 //                }
+                Intent intent = getIntent();
+                String user_id = intent.getStringExtra(Const.EXTRA_USERNAME);
                 Intent edit = new Intent(this, EditorActivity.class);
+                edit.putExtra(Const.EXTRA_USERNAME, user_id);
                 startActivity(edit);
                 setNoActibve();
                 imgbtnNew.setImageResource(R.drawable.plusactive);

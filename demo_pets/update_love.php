@@ -11,7 +11,7 @@ if ( $key == "update_love" ){
     $id    = $_POST['id'];
     $love  = $_POST['love'];
 
-    $query = "UPDATE pets SET love='$love' WHERE id='$id' ";
+    $query = "UPDATE pet SET love='$love' WHERE id='$id' ";
 
         if ( mysqli_query($conn, $query) ){
             $result["value"] = "1";

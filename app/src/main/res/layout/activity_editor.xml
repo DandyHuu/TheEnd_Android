@@ -36,6 +36,8 @@
                 app:fabSize="mini"/>
         </RelativeLayout>
 
+
+
         <androidx.cardview.widget.CardView
             android:id="@+id/layoutName"
             android:layout_marginTop="20dp"
@@ -59,6 +61,30 @@
                     android:fontFamily="sans-serif-light"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/title_add"
+                        android:hint="Title"
+                        android:fontFamily="sans-serif-light"
+                        android:inputType="textPersonName|textCapWords"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/Des_add"
+                        android:hint="Detail"
+                        android:fontFamily="sans-serif-light"
+                        android:inputType="textPersonName|textCapWords"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

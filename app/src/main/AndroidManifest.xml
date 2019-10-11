@@ -35,6 +35,7 @@
         <activity android:name=".EditorActivity"/>
         <activity android:name=".ProfileActivity"
             android:theme="@style/AppTheme.FullScreen"/>
+        <activity android:name=".DetailPetActivity"></activity>
     </application>
 
 </manifest>

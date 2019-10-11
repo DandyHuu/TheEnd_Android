@@ -26,6 +26,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.t3h.appdc.Const;
+import com.t3h.appdc.ConstPet;
+import com.t3h.appdc.DetailPetActivity;
 import com.t3h.appdc.Fragment.DialogPassFragment;
 import com.t3h.appdc.Fragment.DialogShareFragment;
 import com.t3h.appdc.Fragment.NewsFragment;
@@ -103,14 +105,15 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
     }
 
     class NewsHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private ImageView imPet, imLove , imUser, imComment;
+        private ImageView imPet, imLove , imUser, imComment, imbtnLike;
         private EditText edComment;
         private TextView  tvUserName, tvTime, tvDes, tvMore , tvID, tvComment, tvUserPost;
-        private ImageButton imbtnLike, imbtnCommnet, imbtnShare, imbtnSend;
+        private ImageButton  imbtnCommnet, imbtnShare, imbtnSend;
         private RecyclerView rvComment;
         private CommentAdapter adapter;
         private ArrayList<Comment> listCommnet;
         private LinearLayout layout;
+        private RelativeLayout  like_ll,ll_comment, ll_share;;
         private Api api;
         private RecyclerViewClickListener listener;
 
@@ -121,6 +124,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
             imComment = itemView.findViewById(R.id.im_user_comment_new);
             edComment = itemView.findViewById(R.id.ed_text_comment);
             layout = itemView.findViewById(R.id.layout_comment);
+            like_ll = itemView.findViewById(R.id.ll_like);
+            ll_comment = itemView.findViewById(R.id.ll_comment);
+            ll_share = itemView.findViewById(R.id.ll_share);
 
             rvComment = itemView.findViewById(R.id.rv_comment);
             adapter = new CommentAdapter(itemView.getContext());
@@ -130,10 +136,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
             tvUserName =itemView.findViewById(R.id.tv_user_bv);
             tvDes =itemView.findViewById(R.id.tv_description);
             tvMore =itemView.findViewById(R.id.tv_more);
-            tvID =itemView.findViewById(R.id.tv_id_post);
+            tvID =itemView.findViewById(R.id.tv_id_baiviet);
             tvUserPost =itemView.findViewById(R.id.tv_username_post);
 
-            tvComment =itemView.findViewById(R.id.tv_commnet_count);
 
             tvTime =itemView.findViewById(R.id.tv_date_bv);
             imLove = itemView.findViewById(R.id.imgbtn_like_news);
@@ -148,6 +153,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
             imbtnShare.setOnClickListener(this);
             imbtnSend.setOnClickListener(this);
             tvMore.setOnClickListener(this);
+            like_ll.setOnClickListener(this);
+            ll_comment.setOnClickListener(this);
+            ll_share.setOnClickListener(this);
+            imPet.setOnClickListener(this);
         }
         public void bindData(Pets p){
             tvDes.setText(p.getTitle());
@@ -155,7 +164,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
             tvTime.setText(p.getTimeup());
             tvUserPost.setText(p.getUser_id()+"");
             tvID.setText(p.getId()+"");
-            if (p.isLove() == true) {
+            if (p.getLove() == true) {
                 imLove.setImageResource(R.drawable.heart_1);
             }else {
                 imLove.setImageResource(R.drawable.heart);
@@ -189,19 +198,19 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
                 public void onResponse(Call<ArrayList<Comment>> call, Response<ArrayList<Comment>> response) {
                     listCommnet = response.body();
                     adapter.setData(listCommnet);
-                    if (listCommnet.size() > 0) {
-                        tvComment.setText(String.valueOf(listCommnet.size()));
-                    }
-                    else {
-                        tvComment.setVisibility(View.GONE);
-                        imbtnCommnet.setPaddingRelative(0,7,0,7);
-                    }
+//                    if (listCommnet.size() > 0) {
+//                        tvComment.setText(String.valueOf(listCommnet.size()));
+//                    }
+//                    else {
+//                        tvComment.setVisibility(View.GONE);
+//                        imbtnCommnet.setPaddingRelative(0,7,0,7);
+//                    }
                 }
 
                 @Override
                 public void onFailure(Call<ArrayList<Comment>> call, Throwable t) {
-                    tvComment.setVisibility(View.GONE);
-                    imbtnCommnet.setPaddingRelative(0,7,0,7);
+//                    tvComment.setVisibility(View.GONE);
+////                    imbtnCommnet.setPaddingRelative(0,7,0,7);
                 }
             });
         }
@@ -217,10 +226,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
                     tvDes.setMaxLines(10);
                     tvMore.setVisibility(View.GONE);
                     break;
-                case R.id.imgbtn_like_news:
+                case R.id.im_picture_news:
+                    listener.onRowClick(imPet,getAdapterPosition());
 
                     break;
-                case R.id.imgbtn_comment_news:
+                case R.id.ll_comment:
                     if (rvComment.getVisibility() == View.GONE) {
                         rvComment.setVisibility(View.VISIBLE);
                         layout.setVisibility(View.VISIBLE);
@@ -230,8 +240,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
                     }
 
                     break;
-                case R.id.imgbtn_share_news:
-                    listener.onShareClick(imbtnSend, getAdapterPosition());
+                case R.id.ll_share:
+                    listener.onShareClick(ll_share, getAdapterPosition());
 //                    NewsFragment nf = new NewsFragment();
 //                    nf.showDialogShare();
 
@@ -249,14 +259,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
                                 adapter.showDialog(view.getContext());
                                 adapter.setData(response.body());
 //                                Toast.makeText(view.getContext(), id_user +"-"+bl+"-"+id, Toast.LENGTH_SHORT).show();
-                                if (listCommnet.size() > 0) {
-                                    tvComment.setText(String.valueOf(listCommnet.size()));
-                                    tvComment.setVisibility(View.VISIBLE);
-                                }
-                                else {
-                                    tvComment.setVisibility(View.GONE);
-                                    imbtnCommnet.setPaddingRelative(0,7,0,7);
-                                }
+//                                if (listCommnet.size() > 0) {
+//                                    tvComment.setText(String.valueOf(listCommnet.size()));
+//                                    tvComment.setVisibility(View.VISIBLE);
+//                                }
+//                                else {
+//                                    tvComment.setVisibility(View.GONE);
+//                                    imbtnCommnet.setPaddingRelative(0,7,0,7);
+//                                }
                                 String mess = "đã comment bài viết của bạn!";
 //                                Toast.makeText(view.getContext(), mess+" "+user_tac_dong+" "+id+" "+id_user, Toast.LENGTH_LONG).show();
                                 ApiBuilder.getInstance().addNotifi(mess,user_tac_dong,id,id_user).enqueue(new Callback<ResponseBody>() {
@@ -286,6 +296,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
                         });
                     }
                     break;
+                case R.id.ll_like:
+                    listener.onLoveClick(like_ll, getAdapterPosition());
+                     break;
                 default:
                     break;
             }

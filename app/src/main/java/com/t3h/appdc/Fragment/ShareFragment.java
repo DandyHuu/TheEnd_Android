@@ -84,7 +84,7 @@ public class ShareFragment extends Fragment implements SharePetAdapter.OnClickPe
     public void OnClickItem(int position) {
         Intent detail = new Intent(getContext(), ProfileActivity.class);
         detail.putExtra(ConstPet.EXTRA_NAME_PET, dataShare.get(position).getName());
-        detail.putExtra(ConstPet.EXTRA_ABOUT_PET, dataShare.get(position).getMessage());
+        detail.putExtra(ConstPet.EXTRA_ABOUT_PET, dataShare.get(position).getDetail());
         detail.putExtra(ConstPet.EXTRA_BIRTH_PET, dataShare.get(position).getBirth());
         detail.putExtra(ConstPet.EXTRA_GENDER_PET, dataShare.get(position).getGender());
         detail.putExtra(ConstPet.EXTRA_IMAGE_PET, dataShare.get(position).getPicture());

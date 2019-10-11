@@ -27,12 +27,12 @@ import retrofit2.Response;
 public class ResgeterFragment extends Fragment implements View.OnClickListener, onBackPress {
 
     private EditText edtUserRe, edtPassRe, edtPhoneRe, edMail;
-    private Button btnRes;
+    private Button btnRes, btnBack;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.register, container ,false);
+        View v = inflater.inflate(R.layout.fragment_register, container ,false);
         return v;
 
     }
@@ -49,6 +49,8 @@ public class ResgeterFragment extends Fragment implements View.OnClickListener, 
         edtPhoneRe = getActivity().findViewById(R.id.ed_phone_rg);
         edMail = getActivity().findViewById(R.id.ed_email_rg);
         btnRes = getActivity().findViewById(R.id.btn_singup_rg);
+        btnBack = getActivity().findViewById(R.id.btn_back);
+        btnBack.setOnClickListener(this);
         btnRes.setOnClickListener(this);
     }
 
@@ -111,6 +113,10 @@ public class ResgeterFragment extends Fragment implements View.OnClickListener, 
 
 
 
+                break;
+            case R.id.btn_back:
+                LoginActivity login = (LoginActivity) getActivity();
+                login.showFragment(login.getFrmLogin());
                 break;
             default:
                 break;

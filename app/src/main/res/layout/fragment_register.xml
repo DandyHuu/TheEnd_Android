@@ -1,110 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingHorizontal="10dp"
-    android:paddingVertical="15dp"
-    android:background="@drawable/ic_bg">
-    <LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Đăng ký"
-            android:gravity="center"
-            android:textColor="#EDE6F5FF"
-            android:textSize="35sp"
-            android:textStyle="bold"
-            android:padding="15dp"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:padding="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:background="@drawable/shape_boder"
-            android:id="@+id/ed_username_re"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Tên tài khoản"
-            android:textColorHint="#fff"
-            android:textSize="18sp"
-            android:backgroundTint="#D203A9F4"
-            android:textColor="#fff"
-            android:drawablePadding="5dp"
-            android:drawableLeft="@drawable/ic_account"
-            android:drawableTint="#fff"
-            android:paddingHorizontal="7dp"
-            android:paddingVertical="12dp"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:padding="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/ed_pass_re"
-            android:background="@drawable/shape_boder"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Mật khẩu"
-            android:textSize="18sp"
-            android:backgroundTint="#D203A9F4"
-            android:textColor="#fff"
-            android:drawableLeft="@drawable/ic_lock"
-            android:drawableTint="#fff"
-            android:textColorHint="#fff"
-            android:drawablePadding="5dp"
-            android:paddingHorizontal="7dp"
-            android:paddingVertical="11dp"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:padding="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/ed_phone_re"
-            android:background="@drawable/shape_boder"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email "
-            android:textSize="18sp"
-            android:backgroundTint="#D203A9F4"
-            android:textColor="#fff"
-            android:drawableLeft="@drawable/ic_email_black_24dp"
-            android:drawableTint="#fff"
-            android:textColorHint="#fff"
-            android:drawablePadding="5dp"
-            android:paddingHorizontal="7dp"
-            android:paddingVertical="12dp"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:padding="5dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background_image_one_signup"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center">
-        <Button
-            android:id="@+id/btn_dangky_re"
-            android:backgroundTint="#EE2240EC"
-            android:background="@drawable/shape_boder"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="8dp"
+        android:text="Regester"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom">
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=" Đăng ký "
-            android:textColor="#fff"
-            android:textStyle="bold"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="12dp"
-            />
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="@android:color/transparent"
+            android:hint="Name"
+            android:id="@+id/ed_username_rg"
+            android:inputType="textEmailAddress"
+            android:padding="15dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="30dp"
+            android:background="#B1B1B1" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="@android:color/transparent"
+            android:hint="Email"
+            android:id="@+id/ed_email_rg"
+            android:inputType="textEmailAddress"
+            android:padding="15dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="30dp"
+            android:background="#B1B1B1" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="@android:color/transparent"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:id="@+id/ed_password_rg"
+            android:padding="15dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="30dp"
+            android:background="#B1B1B1" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="@android:color/transparent"
+            android:hint="Phone"
+            android:inputType="number"
+            android:id="@+id/ed_phone_rg"
+            android:padding="15dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="30dp"
+            android:background="#B1B1B1" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:tint="@android:color/white"
+                android:layout_marginBottom="20dp"
+                android:elevation="0dp"
+                app:elevation="0dp"
+                android:backgroundTint="#4E525B"
+                app:fabCustomSize="80dp"
+                tools:ignore="RelativeOverlap" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="30dp"
+                android:text="Sign up"
+                android:id="@+id/btn_singup_rg"
+                android:background="#75D5F8"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:padding="15dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="30dp"
+                android:padding="15dp"
+                android:id="@+id/btn_back"
+                android:text="Sign in"
+                android:background="#75D5F8"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
     </LinearLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

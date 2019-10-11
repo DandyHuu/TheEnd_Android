@@ -29,12 +29,24 @@ public interface Api {
     @POST("add_pet.php")
     Call<Pets> insertPet(
             @Field("key") String key,
+            @Field("des") String des,
             @Field("name") String name,
             @Field("species") String species,
             @Field("breed") String breed,
             @Field("gender") int gender,
             @Field("birth") String birth,
             @Field("picture") String picture);
+
+
+    @FormUrlEncoded
+    @POST("add_post.php")
+    Call<ResponseBody> insertBaiviet(
+            @Field("key") String key,
+            @Field("id_user") String id_user,
+            @Field("id_pet") int id_pet,
+            @Field("title") String title,
+            @Field("description") String description);
+
 
     @FormUrlEncoded
     @POST("update_pet.php")

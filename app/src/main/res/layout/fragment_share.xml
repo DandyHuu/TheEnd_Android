@@ -4,11 +4,46 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     android:background="#BAE7E7E7">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bolditalic"
+            android:text="Pets"
+            android:textColor="#FF9800"
+            android:textSize="24dp"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:fontFamily="@font/roboto_bolditalic"
+            android:text="List"
+            android:textColor="#fff"
+            android:textSize="24dp"
+
+            />
+
+
+    </LinearLayout>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="Share"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:text="text discription pets list"
+        android:textColor="#fff"
+        android:textSize="14dp">
+
+    </TextView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_share"
         android:layout_width="match_parent"

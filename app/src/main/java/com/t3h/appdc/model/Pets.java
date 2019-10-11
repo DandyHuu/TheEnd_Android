@@ -22,11 +22,13 @@ public class Pets implements Serializable {
     @SerializedName("picture")
     private String picture;
     @SerializedName("love")
-    private boolean love;
+    private Boolean love;
     @SerializedName("value")
     private String value;
     @SerializedName("message")
     private String message;
+    @SerializedName("detail")
+    private String detail;
     @SerializedName("fullname")
     private String fullname;
     @SerializedName("title")
@@ -35,6 +37,32 @@ public class Pets implements Serializable {
     private String description;
     @SerializedName("id_user")
     private String user_id;
+    @SerializedName("last_id")
+    private int last_id;
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public Boolean getLove() {
+        return love;
+    }
+
+    public void setLove(Boolean love) {
+        this.love = love;
+    }
+
+    public int getLast_id() {
+        return last_id;
+    }
+
+    public void setLast_id(int last_id) {
+        this.last_id = last_id;
+    }
 
     public String getUser_id() {
         return user_id;
@@ -153,13 +181,6 @@ public class Pets implements Serializable {
         this.picture = picture;
     }
 
-    public boolean isLove() {
-        return love;
-    }
-
-    public void setLove(boolean love) {
-        this.love = love;
-    }
 
     public String getValue() {
         return value;

@@ -32,6 +32,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.t3h.appdc.Const;
+import com.t3h.appdc.ConstPet;
+import com.t3h.appdc.DetailPetActivity;
 import com.t3h.appdc.MainActivity;
 import com.t3h.appdc.R;
 import com.t3h.appdc.adapter.HidingScrollListener;
@@ -54,7 +56,6 @@ public class NewsFragment extends Fragment implements NewsAdapter.RecyclerViewCl
     private NewsAdapter adapter;
     private Api api;
     private ProgressBar progressBar;
-    private NewsAdapter.RecyclerViewClickListener listener;
 
     private EditText edPost;
     private ImageView imUser;
@@ -82,18 +83,18 @@ public class NewsFragment extends Fragment implements NewsAdapter.RecyclerViewCl
     }
 
     private void initView() {
-        edPost = getActivity().findViewById(R.id.ed_post);
-        imUser = getActivity().findViewById(R.id.img_user_post);
+//        edPost = getActivity().findViewById(R.id.ed_post);
+//        imUser = getActivity().findViewById(R.id.img_user_post);
         Intent get = getActivity().getIntent();
-        edPost.setFocusable(false);
+//        edPost.setFocusable(false);
 
 //        layout = getActivity().findViewById(R.id.layout_post);
 
-        Glide.with(imUser)
-                .load(get.getStringExtra(Const.EXTRA_AVARTAR))
-                .placeholder(R.drawable.ic_adb_black_24dp)
-                .error(R.drawable.avatar_dog)
-                .into(imUser);
+//        Glide.with(imUser)
+//                .load(get.getStringExtra(Const.EXTRA_AVARTAR))
+//                .placeholder(R.drawable.ic_adb_black_24dp)
+//                .error(R.drawable.avatar_dog)
+//                .into(imUser);
 
         adapter = new NewsAdapter(getContext());
         rvNews = getActivity().findViewById(R.id.rv_news);
@@ -141,12 +142,39 @@ public class NewsFragment extends Fragment implements NewsAdapter.RecyclerViewCl
 
     @Override
     public void onRowClick(View view, int position) {
-        Toast.makeText(getContext(),"101",Toast.LENGTH_SHORT).show();
+        Intent detail = new Intent(getContext(), DetailPetActivity.class);
+        detail.putExtra(ConstPet.EXTRA_ID, dataNews.get(position).getId());
+        detail.putExtra(ConstPet.EXTRA_AVARTAr, dataNews.get(position).getAvatar());
+        detail.putExtra(Const.EXTRA_AVARTAR, dataNews.get(position).getAvatar());
+        detail.putExtra(ConstPet.EXTRA_IMAGE_PET, dataNews.get(position).getPicture());
+        detail.putExtra(ConstPet.EXTRA_LOVE, dataNews.get(position).getLove());
+        detail.putExtra(ConstPet.EXTRA_TIME, dataNews.get(position).getTimeup());
+        detail.putExtra(ConstPet.EXTRA_NAME_PET, dataNews.get(position).getName());
+        detail.putExtra(ConstPet.EXTRA_ID_PET, dataNews.get(position).getId_pet());
+        detail.putExtra(ConstPet.EXTRA_USERPOST, dataNews.get(position).getUser_id());
+        detail.putExtra(ConstPet.EXTRA_TITLE, dataNews.get(position).getTitle());
+        startActivity(detail);
+
     }
 
     @Override
     public void onLoveClick(View view, int position) {
+        final int id = dataNews.get(position).getId();
+        final Boolean love = dataNews.get(position).getLove();
+        final ImageView mLove = view.findViewById(R.id.imgbtn_like_news);
 
+        if (love == true){
+            mLove.setImageResource(R.drawable.heart);
+            dataNews.get(position).setLove(false);
+            updateLove("update_love", id, false);
+            adapter.notifyDataSetChanged();
+        } else {
+            mLove.setImageResource(R.drawable.heart_1);
+            dataNews.get(position).setLove(true);
+            updateLove("update_love", id, true);
+            adapter.notifyDataSetChanged();
+        }
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -156,5 +184,25 @@ public class NewsFragment extends Fragment implements NewsAdapter.RecyclerViewCl
             FragmentTransaction ftshare = getFragmentManager().beginTransaction();
             frmShare.show(ftshare,DialogUserFragment.TAG);
 //        Toast.makeText(getContext(),"1",Toast.LENGTH_SHORT).show();
+    }
+    public void updateLove(final String key, final int id, final Boolean love){
+        ApiBuilder.getInstance().updateLove(key, id, love).enqueue(new Callback<Pets>() {
+            @Override
+            public void onResponse(Call<Pets> call, Response<Pets> response) {
+                Log.i(NewsFragment.class.getSimpleName(), "response" + response.toString());
+                String value = response.body().getValue();
+                String message = response.body().getMessage();
+                if (value.equals("1")) {
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Pets> call, Throwable t) {
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -68,19 +68,26 @@ public class SharePetAdapter extends RecyclerView.Adapter<SharePetAdapter.ShareP
 
     class SharePetHolder extends RecyclerView.ViewHolder {
         private CircleImageView imgPet;
-        private TextView tvNamePet, tvAge, tvCate;
+        private TextView tvNamePet, tvAge, tvCate, tvGender;
 
         public SharePetHolder(@NonNull View itemView) {
             super(itemView);
             imgPet = itemView.findViewById(R.id.im_file);
             tvNamePet = itemView.findViewById(R.id.tv_name_pet);
             tvAge = itemView.findViewById(R.id.tv_age_pet);
+            tvGender = itemView.findViewById(R.id.tv_gender);
             tvCate = itemView.findViewById(R.id.tv_cate_pet);
         }
 
         public void bindData(Pets p){
             tvNamePet.setText(p.getName());
             tvAge.setText(p.getBirth());
+            String gender = "Cái";
+            if (p.getGender() == 1) {
+                gender = "Đực";
+
+            }
+            tvGender.setText(gender);
             tvCate.setText(p.getSpecies());
             Glide.with(imgPet)
                     .load(p.getPicture())

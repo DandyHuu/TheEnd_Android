@@ -1,9 +1,10 @@
 <?php 
-
+header("Content-Type: application/json; charset=UTF-8");
 require_once 'connect.php';
 
 $key = $_POST['key'];
 
+$des        = $_POST['des'];
 $name       = $_POST['name'];
 $species    = $_POST['species'];
 $breed      = $_POST['breed'];
@@ -15,10 +16,13 @@ if ( $key == "insert" ){
 
     $birth_newformat = date('Y-m-d', strtotime($birth));
 
-    $query = "INSERT INTO pets (name,species,breed,gender,birth)
-    VALUES ('$name', '$species', '$breed', '$gender', '$birth_newformat') ";
+    $query = "INSERT INTO pet (des,name,species,breed,gender,birth)
+    VALUES ('$des','$name', '$species', '$breed', '$gender', '$birth_newformat') ";
 
         if ( mysqli_query($conn, $query) ){
+
+            $last_id = mysqli_insert_id($conn);
+            $result["last_id"] = $last_id;
 
             if ($picture == null) {
 
@@ -31,11 +35,13 @@ if ( $key == "insert" ){
 
             } else {
 
+                
+
                 $id = mysqli_insert_id($conn);
                 $path = "pets_picture/$id.jpeg";
                 $finalPath = "/demo_pets/".$path;
 
-                $insert_picture = "UPDATE pets SET picture='$finalPath' WHERE id='$id' ";
+                $insert_picture = "UPDATE pet SET picture='$finalPath' WHERE id='$id' ";
             
                 if (mysqli_query($conn, $insert_picture)) {
             

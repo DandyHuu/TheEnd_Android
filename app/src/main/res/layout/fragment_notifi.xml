@@ -4,11 +4,37 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     android:background="#BAE7E7E7">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="NOtifi"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bolditalic"
+            android:text="Notification"
+            android:textColor="#FF9800"
+            android:textSize="24dp"
+            android:padding="5dp"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:fontFamily="@font/roboto_bolditalic"
+            android:text="List"
+            android:textColor="#fff"
+            android:textSize="24dp"
+
+            />
+
+
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_notifi"
         android:layout_width="match_parent"

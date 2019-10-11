@@ -99,8 +99,8 @@ public class DialogPassFragment extends DialogFragment implements View.OnClickLi
         super.onStart();
         Dialog dialog = getDialog();
         if (dialog != null) {
-            int width = ViewGroup.LayoutParams.MATCH_PARENT;
-            int height = ViewGroup.LayoutParams.MATCH_PARENT;
+            int width = ViewGroup.LayoutParams.WRAP_CONTENT;
+            int height = ViewGroup.LayoutParams.WRAP_CONTENT;
             dialog.getWindow().setLayout(width, height);
         }
     }

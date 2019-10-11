@@ -48,13 +48,14 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class EditorActivity extends AppCompatActivity {
     private Spinner mGenderSpinner;
-    private EditText mName, mSpecies, mBreed, mBirth;
+    private EditText mName, mSpecies, mBreed, mBirth, mDes, mTitle;
     private CircleImageView mPicture;
     private FloatingActionButton mFabChoosePic;
     Calendar myCalendar = Calendar.getInstance();
@@ -99,6 +100,8 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        mTitle = findViewById(R.id.title_add);
+        mDes = findViewById(R.id.Des_add);
         mName = findViewById(R.id.name);
         mSpecies = findViewById(R.id.species);
         mBreed = findViewById(R.id.breed);
@@ -259,13 +262,15 @@ public class EditorActivity extends AppCompatActivity {
         }
     }
 
-    private void postData(String key){
+    private void postData(final String key){
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Wating...");
         progressDialog.show();
 
         readMode();
 
+        final String title = mTitle.getText().toString().trim();
+        final String des = mDes.getText().toString().trim();
         String name = mName.getText().toString().trim();
         String species = mSpecies.getText().toString().trim();
         String breed = mBreed.getText().toString().trim();
@@ -279,7 +284,7 @@ public class EditorActivity extends AppCompatActivity {
         }
 
         api = ApiBuilder.getInstan().create(Api.class);
-        Call<Pets> call = api.insertPet(key, name, species, breed, gender, birth, picture);
+        Call<Pets> call = api.insertPet(key,des, name, species, breed, gender, birth, picture);
         call.enqueue(new Callback<Pets>() {
             @Override
             public void onResponse(Call<Pets> call, Response<Pets> response) {
@@ -287,17 +292,37 @@ public class EditorActivity extends AppCompatActivity {
                 Log.i(EditorActivity.class.getSimpleName(), response.toString());
                 String value = response.body().getValue();
                 String messager = response.body().getMessage();
+                int id = response.body().getLast_id();
+
+                Intent intent = getIntent();
+                String id_user = intent.getStringExtra(Const.EXTRA_USERNAME);
+                Call<ResponseBody> add_post = api.insertBaiviet(key, id_user, id, title, des);
+                add_post.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(EditorActivity.this, "Thanh cong", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(EditorActivity.this, "That bai", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
                 if (value.equals("1")) {
                     finish();
                 }else {
-                    Toast.makeText(EditorActivity.this, messager, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditorActivity.this, messager+"Loi 002", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Pets> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(EditorActivity.this, t.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditorActivity.this, t.getMessage()+"Loi 003",Toast.LENGTH_SHORT).show();
             }
         });
     }
