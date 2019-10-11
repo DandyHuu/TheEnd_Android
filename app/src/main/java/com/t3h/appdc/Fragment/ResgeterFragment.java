@@ -19,6 +19,7 @@ import com.t3h.appdc.R;
 import com.t3h.appdc.api.ApiBuilder;
 import com.t3h.appdc.model.User;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -82,13 +83,12 @@ public class ResgeterFragment extends Fragment implements View.OnClickListener, 
                 final ProgressDialog progressDialog = new ProgressDialog(getContext());
                 progressDialog.setMessage("Wating...");
                 progressDialog.show();
-                ApiBuilder.getInstance().regester(user_re,pass_re,email,phone).enqueue(new Callback<User>() {
-
+                ApiBuilder.getInstance().regester(user_re,pass_re,email,phone).enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful() == true) {
                             Log.i(ResgeterFragment.class.getSimpleName(), response.toString());
-                            Toast.makeText(getContext(), "OK", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Đã đăng ký thành công!", Toast.LENGTH_SHORT).show();
                             LoginActivity login = (LoginActivity) getActivity();
                             login.showFragment(login.getFrmLogin());
                             LoginFragment frmLogin = login.getFrmLogin();
@@ -102,12 +102,11 @@ public class ResgeterFragment extends Fragment implements View.OnClickListener, 
                     }
 
                     @Override
-                    public void onFailure(Call<User> call, Throwable t) {
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
                         progressDialog.dismiss();
                         Toast.makeText(getContext(),"Lỗi đăng ký tài khoản!(002)",Toast.LENGTH_SHORT).show();
                         return;
                     }
-
                 });
 
 
@@ -123,5 +122,4 @@ public class ResgeterFragment extends Fragment implements View.OnClickListener, 
         LoginActivity login = (LoginActivity) getActivity();
         login.showFragment(login.getFrmLogin());
     }
-
 }

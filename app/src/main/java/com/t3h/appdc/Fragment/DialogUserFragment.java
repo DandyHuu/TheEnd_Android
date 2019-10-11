@@ -215,7 +215,8 @@ public class DialogUserFragment extends DialogFragment implements View.OnClickLi
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (activity != null) {
                             Toast.makeText(activity, "Thông tin của bạn đã được đổi!", Toast.LENGTH_SHORT).show();
-//                            MainActivity a = (MainActivity) getActivity();
+                            MainActivity a = (MainActivity) getActivity();
+//                            a.replaceFragment(UserInfoFragment.class);
 //                            a.replaceFragment();
                         }
                     }

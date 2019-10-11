@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -57,6 +58,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -224,6 +226,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.imgbtn_pets:
                 if (viewPager != null) {
                     viewPager.setCurrentItem(1,false);
+
                 }
                 setNoActibve();
                 imgbtnPet.setImageResource(R.drawable.pawprintactive);
@@ -392,5 +395,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         }
+    }
+
+    public NewsFragment getFrmNews() {
+        return frmNews;
+    }
+
+    public ShareFragment getFrmShare() {
+        return frmShare;
+    }
+
+    public UserInfoFragment getFrmUser() {
+        return frmUser;
+    }
+
+    public NotifiFragment getFrmNoti() {
+        return frmNoti;
+    }
+
+    public EditorFragment getFrmEditor() {
+        return frmEditor;
     }
 }

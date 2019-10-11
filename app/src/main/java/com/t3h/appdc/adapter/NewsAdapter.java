@@ -1,7 +1,10 @@
 package com.t3h.appdc.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,19 +16,28 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.t3h.appdc.Const;
+import com.t3h.appdc.Fragment.DialogPassFragment;
+import com.t3h.appdc.Fragment.DialogShareFragment;
 import com.t3h.appdc.Fragment.NewsFragment;
+import com.t3h.appdc.Fragment.NotifiFragment;
 import com.t3h.appdc.MainActivity;
 import com.t3h.appdc.R;
+import com.t3h.appdc.api.Api;
 import com.t3h.appdc.api.ApiBuilder;
 import com.t3h.appdc.model.Comment;
+import com.t3h.appdc.model.Notifi;
 import com.t3h.appdc.model.Pets;
+import com.t3h.appdc.model.User;
 
 import java.sql.Date;
 import java.text.ParseException;
@@ -36,6 +48,7 @@ import java.util.List;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,6 +57,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
     private LayoutInflater inflater;
     private ArrayList<Pets> data;
     private RecyclerViewClickListener listener;
+    private Context context;
 
     public void setListener(RecyclerViewClickListener listener) {
         this.listener = listener;
@@ -54,18 +68,33 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
         notifyDataSetChanged();
     }
 
-    public NewsAdapter(Context context){inflater = LayoutInflater.from(context);}
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public NewsAdapter(Context context){
+        inflater = LayoutInflater.from(context);
+        this.context = context;
+    }
     @NonNull
     @Override
     public NewsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = inflater.inflate(R.layout.item_main , parent , false);
-        return new NewsHolder(v);
+        return new NewsHolder(v, listener);
     }
 
     @SuppressLint("CheckResult")
     @Override
-    public void onBindViewHolder(@NonNull NewsHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NewsHolder holder, final int position) {
         holder.bindData(data.get(position));
+//        if (listener != null) {
+//            holder.itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    listener.onShareClick(v,position);
+//                }
+//            });
+//        }
     }
 
     @Override
@@ -76,15 +105,18 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
     class NewsHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView imPet, imLove , imUser, imComment;
         private EditText edComment;
-        private TextView  tvUserName, tvTime, tvDes, tvMore , tvID, tvComment;
+        private TextView  tvUserName, tvTime, tvDes, tvMore , tvID, tvComment, tvUserPost;
         private ImageButton imbtnLike, imbtnCommnet, imbtnShare, imbtnSend;
         private RecyclerView rvComment;
         private CommentAdapter adapter;
         private ArrayList<Comment> listCommnet;
         private LinearLayout layout;
+        private Api api;
+        private RecyclerViewClickListener listener;
 
-        public NewsHolder(@NonNull View itemView) {
+        public NewsHolder(@NonNull View itemView,RecyclerViewClickListener mlistener) {
             super(itemView);
+            listener = mlistener;
             imPet = itemView.findViewById(R.id.im_picture_news);
             imComment = itemView.findViewById(R.id.im_user_comment_new);
             edComment = itemView.findViewById(R.id.ed_text_comment);
@@ -99,6 +131,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
             tvDes =itemView.findViewById(R.id.tv_description);
             tvMore =itemView.findViewById(R.id.tv_more);
             tvID =itemView.findViewById(R.id.tv_id_post);
+            tvUserPost =itemView.findViewById(R.id.tv_username_post);
+
             tvComment =itemView.findViewById(R.id.tv_commnet_count);
 
             tvTime =itemView.findViewById(R.id.tv_date_bv);
@@ -116,10 +150,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
             tvMore.setOnClickListener(this);
         }
         public void bindData(Pets p){
-            tvDes.setText(p.getDescription());
+            tvDes.setText(p.getTitle());
             tvUserName.setText(p.getFullname());
             tvTime.setText(p.getTimeup());
-
+            tvUserPost.setText(p.getUser_id()+"");
+            tvID.setText(p.getId()+"");
             if (p.isLove() == true) {
                 imLove.setImageResource(R.drawable.heart_1);
             }else {
@@ -174,14 +209,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
 
 
         @Override
-        public void onClick(View view) {
-            String id = tvID.getText().toString();
+        public void onClick(final View view) {
+            final String id = tvID.getText().toString();
+            final String id_user = tvUserPost.getText().toString();
             switch (view.getId()) {
                 case R.id.tv_more:
                     tvDes.setMaxLines(10);
                     tvMore.setVisibility(View.GONE);
                     break;
                 case R.id.imgbtn_like_news:
+
                     break;
                 case R.id.imgbtn_comment_news:
                     if (rvComment.getVisibility() == View.GONE) {
@@ -194,131 +231,70 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
 
                     break;
                 case R.id.imgbtn_share_news:
+                    listener.onShareClick(imbtnSend, getAdapterPosition());
+//                    NewsFragment nf = new NewsFragment();
+//                    nf.showDialogShare();
+
                     break;
                 case R.id.imbtn_send:
-                    String bl = edComment.getText().toString();
-                    if (bl.isEmpty() && bl != " ") {
+                    final String bl = edComment.getText().toString();
+                    final Intent intent = ((Activity) context).getIntent();
+                    final String user_tac_dong = intent.getStringExtra(Const.EXTRA_USERNAME);
+//                    Toast.makeText(view.getContext(), "200", Toast.LENGTH_SHORT).show();
+                    if (bl.isEmpty()==false && bl != " ") {
 
+                        ApiBuilder.getInstance().addComment(user_tac_dong,bl,id).enqueue(new Callback<ArrayList<Comment>>() {
+                            @Override
+                            public void onResponse(Call<ArrayList<Comment>> call, Response<ArrayList<Comment>> response) {
+                                adapter.showDialog(view.getContext());
+                                adapter.setData(response.body());
+//                                Toast.makeText(view.getContext(), id_user +"-"+bl+"-"+id, Toast.LENGTH_SHORT).show();
+                                if (listCommnet.size() > 0) {
+                                    tvComment.setText(String.valueOf(listCommnet.size()));
+                                    tvComment.setVisibility(View.VISIBLE);
+                                }
+                                else {
+                                    tvComment.setVisibility(View.GONE);
+                                    imbtnCommnet.setPaddingRelative(0,7,0,7);
+                                }
+                                String mess = "đã comment bài viết của bạn!";
+//                                Toast.makeText(view.getContext(), mess+" "+user_tac_dong+" "+id+" "+id_user, Toast.LENGTH_LONG).show();
+                                ApiBuilder.getInstance().addNotifi(mess,user_tac_dong,id,id_user).enqueue(new Callback<ResponseBody>() {
+                                    @Override
+                                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                        if(response.isSuccessful()) {
+//                                            Toast.makeText(context, "OK Men", Toast.LENGTH_SHORT).show();
+                                            edComment.setText("");
+                                        }
+                                        else {
+//                                            Toast.makeText(context, "Chưa thêm đâu!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+//
+                            }
+
+                            @Override
+                            public void onFailure(Call<ArrayList<Comment>> call, Throwable t) {
+                                Toast.makeText(view.getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                     break;
                 default:
                     break;
             }
         }
-//        public void bindData(Pets p){
-//            tvName.setText(p.getName());
-//            tvBirth.setText(String.valueOf(p.getBirh()));
-////            String gen = "Thái Hậu";
-////            if (p.isGender() == true) {
-////                gen = "Hoàng Thượng";
-////            }
-////            tvGener.setText(gen);
-//            Glide.with(imPet)
-//                    .load(p.getPicture())
-//                    .placeholder(R.mipmap.ic_launcher)
-//                    .error(R.drawable.ic_adb_black_24dp)
-//                    .into(imPet);
-//        }
-//
-//        @Override
-//        public void onClick(View view) {
-//
-//        }
     }
-//
-//    public interface OnClickPet{
-//         void OnClickItem(int position);
-//    }
-
-
-
-
-//    List<Pets> pets, petsFilter;
-//    private Context context;
-//    private RecyclerViewClickListener mListener;
-//
-//    public NewsAdapter(List<Pets> pets, Context context, RecyclerViewClickListener listener) {
-//        this.pets = pets;
-//        this.context = context;
-//        this.mListener = listener;
-//    }
-//
-//    @Override
-//    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_new, parent, false);
-//        return new MyViewHolder(view, mListener);
-//    }
-//
-//    @SuppressLint("CheckResult")
-//    @Override
-//    public void onBindViewHolder(final MyViewHolder holder, int position) {
-//
-//        holder.tvName.setText(pets.get(position).getName());
-//        holder.tvBirth.setText(pets.get(position).getBirh());
-//        String gen = "Thái Hậu";
-//            if (pets.get(position).isGender() == true) {
-//                gen = "Hoàng Thượng";
-//            }
-//            holder.tvGener.setText(gen);
-//
-//        RequestOptions requestOptions = new RequestOptions();
-//        requestOptions.skipMemoryCache(true);
-//        requestOptions.diskCacheStrategy(DiskCacheStrategy.NONE);
-//        requestOptions.placeholder(R.drawable.logo);
-//        requestOptions.error(R.drawable.logo);
-//
-//        Glide.with(context)
-//                .load(pets.get(position).getPicture())
-//                .apply(requestOptions)
-//                .into(holder.imPet);
-//
-//
-//
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return pets.size();
-//    }
-//
-//
-//
-//    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-//
-//        private ImageView imPet;
-//        private TextView tvBirth, tvName, tvGener;
-//        private Button btnDetail;
-//
-//        public MyViewHolder(View itemView, RecyclerViewClickListener listener) {
-//            super(itemView);
-//            imPet = itemView.findViewById(R.id.im_picture);
-//            tvBirth = itemView.findViewById(R.id.tv_birth);
-//            tvName = itemView.findViewById(R.id.tv_name);
-//            tvGener = itemView.findViewById(R.id.tv_gener);
-//
-//            btnDetail = itemView.findViewById(R.id.btn_profile);
-//            btnDetail.setOnClickListener(this);
-////        }
-////
-//        }
-//
-//        @Override
-//        public void onClick(View v) {
-////            switch (v.getId()) {
-////                case R.id.row_container:
-////                    mListener.onRowClick(mRowContainer, getAdapterPosition());
-////                    break;
-////                case R.id.love:
-////                    mListener.onLoveClick(mLove, getAdapterPosition());
-////                    break;
-////                default:
-////                    break;
-////            }
-//        }
-//    }
 
     public interface RecyclerViewClickListener {
         void onRowClick(View view, int position);
         void onLoveClick(View view, int position);
+        void onShareClick(View view, int position);
     }
 }

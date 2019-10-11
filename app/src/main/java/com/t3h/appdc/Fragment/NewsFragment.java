@@ -2,6 +2,7 @@ package com.t3h.appdc.Fragment;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -44,7 +48,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class NewsFragment extends Fragment{
+public class NewsFragment extends Fragment implements NewsAdapter.RecyclerViewClickListener {
     private RecyclerView rvNews;
     private ArrayList<Pets> dataNews;
     private NewsAdapter adapter;
@@ -94,6 +98,7 @@ public class NewsFragment extends Fragment{
         adapter = new NewsAdapter(getContext());
         rvNews = getActivity().findViewById(R.id.rv_news);
         rvNews.setAdapter(adapter);
+        adapter.setListener(this);
 //        rvNews.setOnScrollListener(new HidingScrollListener() {
 //            @Override
 //            public void onHide() {
@@ -108,26 +113,6 @@ public class NewsFragment extends Fragment{
 
     }
 
-
-    private void hideViews() {
-        handler = new Handler();
-
-        toolbar.animate().translationY(-toolbar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
-
-    }
-
-    private void showViews() {
-        toolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
-
-    }
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        MainActivity m = (MainActivity) getActivity();
-//        m.setNoActibve();
-//        m.getImgbtnHome().setImageResource(R.drawable.homeactive);
-//    }
 
     private void initData() {
         ApiBuilder.getInstance().getPost().enqueue(new Callback<ArrayList<Pets>>() {
@@ -152,5 +137,24 @@ public class NewsFragment extends Fragment{
 
     public void getPets(){
 
+    }
+
+    @Override
+    public void onRowClick(View view, int position) {
+        Toast.makeText(getContext(),"101",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onLoveClick(View view, int position) {
+
+    }
+
+    @Override
+    public void onShareClick(View view, int position) {
+//            Toast.makeText(getContext(),"101",Toast.LENGTH_SHORT).show();
+            DialogShareFragment frmShare = new DialogShareFragment();
+            FragmentTransaction ftshare = getFragmentManager().beginTransaction();
+            frmShare.show(ftshare,DialogUserFragment.TAG);
+//        Toast.makeText(getContext(),"1",Toast.LENGTH_SHORT).show();
     }
 }

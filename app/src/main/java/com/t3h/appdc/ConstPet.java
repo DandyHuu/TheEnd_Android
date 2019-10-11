@@ -7,7 +7,7 @@ public class ConstPet {
     public static String EXTRA_BIRTH_PET = "12/31/2019";
     public static String EXTRA_GENDER_PET = "sex";
     public static String EXTRA_SPECIES_PET = "Mèo ngu";
-    public static String EXTRA_ID_PET = "id";
+    public static String EXTRA_ID_PET = "EXTRA_ID_PET";
     public static String EXTRA_USERNAME = "Mèo ngu";
 
 }

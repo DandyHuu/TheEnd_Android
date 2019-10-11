@@ -89,7 +89,7 @@ public class ShareFragment extends Fragment implements SharePetAdapter.OnClickPe
         detail.putExtra(ConstPet.EXTRA_GENDER_PET, dataShare.get(position).getGender());
         detail.putExtra(ConstPet.EXTRA_IMAGE_PET, dataShare.get(position).getPicture());
         detail.putExtra(ConstPet.EXTRA_SPECIES_PET, dataShare.get(position).getSpecies());
-        detail.putExtra(ConstPet.EXTRA_ID_PET, dataShare.get(position).getId_pet());
+        detail.putExtra(ConstPet.EXTRA_ID_PET, String.valueOf(dataShare.get(position).getId_pet()));
         detail.putExtra(ConstPet.EXTRA_USERNAME, dataShare.get(position).getFullname());
 
         startActivity(detail);

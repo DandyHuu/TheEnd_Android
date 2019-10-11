@@ -25,4 +25,6 @@
     <string name="gender_female">Thái Hậu</string>
 
     <string name="more"><u>xem thêm</u></string>
+    <string name="facebook_app_id">YOUR FACEBOOK APP ID</string>
+
 </resources>

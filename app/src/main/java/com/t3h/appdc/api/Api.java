@@ -1,6 +1,7 @@
 package com.t3h.appdc.api;
 
 import com.t3h.appdc.model.Comment;
+import com.t3h.appdc.model.Notifi;
 import com.t3h.appdc.model.User;
 import com.t3h.appdc.model.Pets;
 
@@ -68,7 +69,7 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("regester.php")
-    Call<User> regester(
+    Call<ResponseBody> regester(
             @Field("username") String username,
             @Field("password") String password,
             @Field("email") String email,
@@ -98,7 +99,21 @@ public interface Api {
     @FormUrlEncoded
     Call<ArrayList<Comment>> addComment(@Field("username") String username,
                                         @Field("comment") String comment,
-                                        @Field("idbaiviet") String idbaiviet
+                                        @Field("baivietid") String baivietid
                                         );
+    @POST("get_notification.php")
+    @FormUrlEncoded
+    Call<ArrayList<Notifi>> getNotifi(@Field("login_name") String login_name);
 
+    @POST("get_user_withbaiviet.php")
+    @FormUrlEncoded
+    Call<ArrayList<User>> getUserWithBaiViet(@Field("id_baiviet") String id_baiviet);
+
+    @POST("add_thongbao.php")
+    @FormUrlEncoded
+    Call<ResponseBody> addNotifi(@Field("mess") String mess,
+                                      @Field("user_id") String user_id,
+                                      @Field("baivietid") String baivietid,
+                                      @Field("user_bi_like") String user_bi_like
+                                    );
 }

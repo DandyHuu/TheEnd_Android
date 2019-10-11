@@ -10,6 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<!--        <provider-->
+<!--            android:name="com.facebook.FacebookContentProvider"-->
+<!--            android:authorities="com.facebook.app.FacebookContentProviderYOUR_FACEBOOK_APP_ID"-->
+<!--            android:exported="true"/>-->
+
         <activity android:name=".slide.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,6 +1,9 @@
 package com.t3h.appdc.adapter;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.t3h.appdc.MainActivity;
 import com.t3h.appdc.R;
 import com.t3h.appdc.model.Comment;
 import com.t3h.appdc.model.Pets;
@@ -22,12 +26,30 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
     private LayoutInflater inflater;
     private ArrayList<Comment> data;
     private OnClickComment listenner;
+    private ProgressDialog progressDialog;
 
     public CommentAdapter(Context context) {
         this.inflater = LayoutInflater.from(context);
     }
 
+    public void showDialog(Context context){
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Waiting...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+        Runnable progressRunnable = new Runnable() {
+
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+            }
+        };
+
+        Handler pdCanceller = new Handler();
+        pdCanceller.postDelayed(progressRunnable, 3000);
+    }
     public void setData(ArrayList<Comment> data) {
+
         this.data = data;
         notifyDataSetChanged();
     }

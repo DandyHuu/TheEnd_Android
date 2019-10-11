@@ -54,10 +54,10 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initView();
+        initViewInfo();
     }
 
-    private void initView() {
+    public void initViewInfo() {
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Wating...");
 

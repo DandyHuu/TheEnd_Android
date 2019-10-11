@@ -15,18 +15,18 @@
         android:src="@mipmap/ic_launcher" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="7dp"
         android:background="@drawable/shape_boder"
-        android:backgroundTint="#2A7E7E7E"
-        android:padding="10dp"
+        android:backgroundTint="#2A9C9C9C"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="10dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
             android:orientation="horizontal"
             >
             <TextView
@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name"
-                android:textColor="#D83F51B5"
+                android:textColor="#D83A3A3A"
                 android:textSize="17sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -46,7 +46,6 @@
             >
 
             <TextView
-                android:paddingVertical="2dp"
                 android:id="@+id/tv_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:background="#A6FFFFFF"
+    android:background="#A6DADADA"
     android:layout_marginTop="5dp"
     android:padding="10dp">
     <de.hdodenhof.circleimageview.CircleImageView
