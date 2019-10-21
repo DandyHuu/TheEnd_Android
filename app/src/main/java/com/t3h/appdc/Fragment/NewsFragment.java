@@ -112,10 +112,11 @@ public class NewsFragment extends Fragment implements NewsAdapter.RecyclerViewCl
 //            }
 //        });
 
+
     }
 
 
-    private void initData() {
+    public void initData() {
         ApiBuilder.getInstance().getPost().enqueue(new Callback<ArrayList<Pets>>() {
             @Override
             public void onResponse(Call<ArrayList<Pets>> call, Response<ArrayList<Pets>> response) {
@@ -133,6 +134,7 @@ public class NewsFragment extends Fragment implements NewsAdapter.RecyclerViewCl
     public void setDataNews(ArrayList<Pets> data) {
         this.adapter.setData(data);
         this.dataNews = data;
+        adapter.notifyDataSetChanged();
 
     }
 

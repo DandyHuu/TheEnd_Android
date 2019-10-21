@@ -27,7 +27,7 @@
             android:layout_marginLeft="4dp"
             android:fontFamily="@font/roboto_bolditalic"
             android:text="List"
-            android:textColor="#fff"
+            android:textColor="#3A3939"
             android:textSize="24dp"
 
             />
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_regular"
         android:text="text discription pets list"
-        android:textColor="#fff"
+        android:textColor="#414040"
         android:textSize="14dp">
 
     </TextView>

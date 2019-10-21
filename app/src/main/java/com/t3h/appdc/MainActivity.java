@@ -177,13 +177,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void getPets(){
+    public void getPets(){
         ApiBuilder.getInstance().getPost().enqueue(new Callback<ArrayList<Pets>>() {
             @Override
             public void onResponse(Call<ArrayList<Pets>> call, Response<ArrayList<Pets>> response) {
                 dataNews=response.body();
                 frmNews.setDataNews(dataNews);
                 frmShare.setDataShare(dataNews);
+
 
             }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 11, 2019 lúc 11:31 PM
+-- Thời gian đã tạo: Th10 21, 2019 lúc 06:55 AM
 -- Phiên bản máy phục vụ: 10.1.37-MariaDB
 -- Phiên bản PHP: 7.3.0
 
@@ -52,7 +52,10 @@ INSERT INTO `baiviet` (`id`, `id_user`, `id_pet`, `title`, `description`, `timeu
 (15, 'member', 29, 'It is a long established fact that a reader will be distracted', 'It is a long established fact that a reader will be distracted by the readable content', '2019-10-09 00:00:00'),
 (16, 'admin', 30, 'Đây là con mèo thứ 2 của tôi!.You like it?Lorem Ipsum has been the industry\'s standard dummy', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', '2019-10-09 00:00:00'),
 (17, 'anhhuu', 31, 'Đây là con mèo thứ 7 của tôi!.You like it? Look like that typesetting industry.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', '2019-10-09 00:00:00'),
-(18, 'member', 33, 'It typesetting industry. is a long established fact that a reader will be distracted', 'It is a long established fact that a reader will be distracted by the readable content', '2019-10-09 00:00:00');
+(18, 'member', 33, 'It typesetting industry. is a long established fact that a reader will be distracted', 'It is a long established fact that a reader will be distracted by the readable content', '2019-10-09 00:00:00'),
+(19, 'member', 35, 'meo meo meo', 'des', '12-10-2019'),
+(20, 'member', 37, 'Mèo', 'mèo ngu', '12-10-2019'),
+(21, 'member', 38, 'Nhìn hơi ngu', 'Cần bán', '12-10-2019');
 
 -- --------------------------------------------------------
 
@@ -117,7 +120,9 @@ INSERT INTO `comment` (`id`, `id_baiviet`, `id_user`, `comment`, `date`) VALUES
 (126, 1, 'yyyyy', 'hhhh', '11-10-2019'),
 (127, 1, 'admin', 'hhhh', '11-10-2019'),
 (128, 1, 'admin', 'ngu', '11-10-2019'),
-(129, 1, 'admin', '66666', '11-10-2019');
+(129, 1, 'admin', '66666', '11-10-2019'),
+(130, 17, 'member', 'hello', '12-10-2019'),
+(131, 1, 'member', 'jdjfjf', '12-10-2019');
 
 -- --------------------------------------------------------
 
@@ -168,7 +173,9 @@ INSERT INTO `noti` (`id`, `cate_noti`, `mess`, `user_id`, `baiviet_id`, `dateup`
 (26, 1, 'Có ai vừa nghe nhạc vừa lướt đọc bình luận', 'yyyyy', 2, '11-10-2019 01:55:01pm', 'member'),
 (27, 1, 'Có ai vừa nghe nhạc vừa lướt đọc bình luận', 'yyyyy', 2, '11-10-2019 01:58:52pm', 'member'),
 (28, 1, 'Có ai vừa nghe nhạc vừa lướt đọc bình luận', 'yyyyy', 2, '11-10-2019 06:59:29pm', 'member'),
-(29, 1, 'Có ai vừa nghe nhạc vừa lướt đọc bình luận', 'yyyyy', 2, '11-10-2019 07:00:07pm', 'admin');
+(29, 1, 'Có ai vừa nghe nhạc vừa lướt đọc bình luận', 'yyyyy', 2, '11-10-2019 07:00:07pm', 'admin'),
+(30, 1, 'đã comment bài viết của bạn!', 'member', 17, '12-10-2019 08:38:55am', 'anhhuu'),
+(31, 1, 'đã comment bài viết của bạn!', 'member', 1, '12-10-2019 09:16:30am', 'admin');
 
 -- --------------------------------------------------------
 
@@ -193,17 +200,22 @@ CREATE TABLE `pet` (
 --
 
 INSERT INTO `pet` (`id`, `des`, `name`, `species`, `breed`, `gender`, `birth`, `picture`, `love`) VALUES
-(1, 't is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, con', 'Lucime', 'long ngan', 'meo anh', 1, '2019-10-17', '/demo_pets/pets_picture/1.jpg', 'false'),
-(2, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has su', 'MeoMun', 'Mèo lông dài', 'Mèo em', 1, '2019-10-06', '/demo_pets/pets_picture/2.jpeg', 'false'),
+(1, 't is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, con', 'Lucime', 'long ngan', 'meo anh', 1, '2019-10-17', '/demo_pets/pets_picture/1.jpg', 'true'),
+(2, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has su', 'MeoMun', 'Mèo lông dài', 'Mèo em', 1, '2019-10-06', '/demo_pets/pets_picture/2.jpeg', 'true'),
 (3, 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, yo', 'Taptap', 'Mèo lông dài', 'Mèo em', 1, '2019-10-01', '/demo_pets/pets_picture/6.jpg', 'false'),
-(4, 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions ', 'Booo', 'long ngan', 'meo anh', 1, '2019-10-02', '/demo_pets/pets_picture/7.jpg', 'true'),
+(4, 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions ', 'Booo', 'long ngan', 'meo anh', 1, '2019-10-02', '/demo_pets/pets_picture/7.jpg', 'false'),
 (26, 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions ', 'OMMO', 'long ngan', 'meo anh', 2, '2019-10-02', '/demo_pets/pets_picture/5.jpg', 'true'),
 (27, 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions ', 'Lorem', 'long ngan', 'meo anh', 2, '2019-10-02', '/demo_pets/pets_picture/8.jpg', 'true'),
 (28, 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions ', 'LOLIPOP', 'Lông cụt', 'Chó nhà', 2, '2019-10-02', '/demo_pets/pets_picture/9.jpg', 'true'),
 (29, 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions ', 'YouD', 'long ngan', 'meo anh', 2, '2019-10-02', '/demo_pets/pets_picture/20.jpeg', 'true'),
 (30, 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions ', 'Tity', 'long ngan', 'meo anh', 2, '2019-10-02', '/demo_pets/pets_picture/21.jpeg', 'true'),
 (31, 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions ', 'DAO', 'long ngan', 'meo anh', 2, '2019-10-02', '/demo_pets/pets_picture/22.jpeg', 'true'),
-(33, 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions ', 'YouD', 'long ngan', 'meo anh', 2, '2019-10-02', '/demo_pets/pets_picture/24.jpeg', 'true');
+(33, 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions ', 'YouD', 'long ngan', 'meo anh', 2, '2019-10-02', '/demo_pets/pets_picture/24.jpeg', 'true'),
+(34, 'Mèo nhà nuôi dễ thịt', 'Doremon', 'Mèo', 'Mèo lông dài', 1, '2019-10-04', '/demo_pets/pets_picture/34.jpeg', 'false'),
+(35, 'des', 'miu', 'mèo', 'Mèo lông dài', 1, '2019-10-04', '/demo_pets/pets_picture/35.jpeg', 'false'),
+(36, 'hello các bạn', 'Miu', 'mèo', 'Mèo lông ngắn', 1, '2019-10-04', '/demo_pets/pets_picture/36.jpeg', 'false'),
+(37, 'mèo ngu', 'Doremon', 'Mèo', 'Mèo lông dài', 1, '2019-10-05', '/demo_pets/pets_picture/37.jpeg', 'false'),
+(38, 'Cần bán', 'Đại ngáo', 'Chó', 'Chí ngáo', 1, '2019-10-04', '/demo_pets/pets_picture/38.jpeg', 'false');
 
 -- --------------------------------------------------------
 
@@ -233,6 +245,7 @@ INSERT INTO `user` (`username`, `password`, `fullname`, `email`, `phone`, `addre
 ('anhhuu', '123456', 'DR.MONN', 'robotmeobg@gmail.com ', '0599853354', '', 0, NULL, 'OmyChuoi@yahoo.com.vn', '20/09/1999'),
 ('jonkey', '123', '', 'tongtien@gmail.com', '094965266585', '', 0, NULL, '', ''),
 ('member', '123456', 'Minh nuti', 'membermin@yahoo.com.vn', '012364987', '123 - TP.HCM', 0, NULL, 'Obama@feedback.com', '20/09/1999'),
+('minhbro', '1234567', '', 'hello', '0948886563', '', 0, NULL, '', ''),
 ('qwer', '123456', 'Kem tươi', 'rongbg@gmail.com ', '096845333', '', 0, NULL, '', '20/09/1999'),
 ('yyyyy', 'bnm', 'Lung Lo', 'hhh', '85668856', 'Hn', 0, NULL, 'iii8iiiiiiiiiiiiiiiiiiii', '27 October 2019');
 
@@ -286,25 +299,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `baiviet`
 --
 ALTER TABLE `baiviet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT cho bảng `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
 
 --
 -- AUTO_INCREMENT cho bảng `noti`
 --
 ALTER TABLE `noti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT cho bảng `pet`
 --
 ALTER TABLE `pet`
-  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

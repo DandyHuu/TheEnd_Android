@@ -189,7 +189,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
             Glide.with(imComment)
                     .load(p.getAvatar())
                     .placeholder(R.drawable.ic_adb_black_24dp)
-                    .error(R.drawable.avatar_dog)
+                    .error(R.drawable.concho)
                     .into(imComment);
 
             String idPost = String.valueOf(p.getId());

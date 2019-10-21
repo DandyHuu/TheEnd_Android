@@ -8,7 +8,7 @@ $query = "SELECT b.id, b.id_user, b.id_pet, b.title, b.description, b.timeup, p.
 $result = mysqli_query($conn, $query);
 $response = array();
 
-$server_name = "http://192.168.82.103:88";
+$server_name = "http://192.168.1.87:88";
 
 while( $row = mysqli_fetch_assoc($result) ){
 

@@ -28,7 +28,7 @@
             android:layout_marginLeft="4dp"
             android:fontFamily="@font/roboto_bolditalic"
             android:text="List"
-            android:textColor="#fff"
+            android:textColor="#3F3E3E"
             android:textSize="24dp"
 
             />

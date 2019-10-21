@@ -199,13 +199,13 @@ public class EditorActivity extends AppCompatActivity {
                 else {
 
                     postData("insert");
-                    action.findItem(R.id.menu_edit).setVisible(true);
+//                    action.findItem(R.id.menu_edit).setVisible(true);
                     action.findItem(R.id.menu_save).setVisible(false);
-                    action.findItem(R.id.menu_delete).setVisible(true);
+//                    action.findItem(R.id.menu_delete).setVisible(true);
 
                     readMode();
                 }
-                Intent intent = new Intent(this,EditorActivity.class);
+                Intent intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
